@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorCharts.PlotDataModels;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using static System.Math;
 
@@ -9,6 +10,7 @@ namespace BlazorCharts
         [EditorRequired] [Parameter] public IList<ScatterPoint> Data { get; set; } = default!;
         [Parameter] public double Width { get; set; } = 700;
         [Parameter] public double Height { get; set; } = 350;
+        [Parameter] public string Title { get; set; } = "Scatter Chart";
 
         private double XMin;
         private double XMax;
@@ -20,8 +22,10 @@ namespace BlazorCharts
         private double tooltipY;
         private double tooltipHeight;
         private double tooltipWidth;
-        private double MarginX = 30;
-        private const double MarginY = 20;
+        private double MarginLeft = 30;
+        private const double MarginRight= 10;
+        private const double MarginTop = 30;
+        private const double MarginBottom = 20;
         private IEnumerable<(string text, int index)>? tooltipProperties;
 
         protected override void OnParametersSet()
@@ -33,16 +37,16 @@ namespace BlazorCharts
         {
             (XMin, XMax) = GetLimits(Data.Select(x => x.X));
             (YMin, YMax) = GetLimits(Data.Select(x => x.Y));
-            SetMarginX(Data.Select(x => x.Y));
+            SetMarginLeft(Data.Select(x => x.Y));
         }
 
-        private void SetMarginX(IEnumerable<double> values)
+        private void SetMarginLeft(IEnumerable<double> values)
         {
             double minVal = values.Min();
             double maxVal = values.Max();
             double diff = maxVal - minVal;
             double order = Round(Log10(diff));
-            MarginX = order * 10 + 10;
+            MarginLeft = order * 10 + 10;
         }
 
         private (double min, double max) GetLimits(IEnumerable<double> values)
@@ -61,13 +65,13 @@ namespace BlazorCharts
 
         private double GetXCoordinate(double value)
         {
-            double result = MarginX + (value - XMin) / (XMax - XMin) * (Width - 2 * MarginX);
+            double result = MarginLeft + (value - XMin) / (XMax - XMin) * (Width - MarginLeft - MarginRight);
             return result;
         }
 
         private double GetYCoordinate(double value)
         {
-            double result = Height - MarginY - (value - YMin) / (YMax - YMin) * (Height - 2 * MarginY);
+            double result = Height - MarginBottom - (value - YMin) / (YMax - YMin) * (Height - MarginBottom - MarginTop);
             return result;
         }
 

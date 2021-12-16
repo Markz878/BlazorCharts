@@ -1,15 +1,16 @@
 ﻿<svg class="chart" width="100%" height="90%" viewBox="0 0 @Width @Height">
+    <text x="@(Width/2)" y="15" font-size="16px" text-anchor="middle">@Title</text>
     <g>
         @foreach (double value in YAxis)
         {
-            <line x1="@MarginX" y1="@GetYCoordinate(value)" x2="@Width" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1="@MarginLeft" y1="@GetYCoordinate(value)" x2="@Width" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>
         @foreach(double value in YAxis)
         {
             <text>
-                <text x="@(MarginX-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
+                <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
             </text>
         }
     </g>
@@ -24,7 +25,7 @@
     <g>
         @foreach((BarItem p, int index) in Data.Select((x,i)=>(x,i)))
         {
-            <rect x="@(GetXCoordinate(index)-GetBarWidth()/2)" y="@GetYCoordinate(p.Value)" height="@GetBarHeight(p.Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="red" class="data-bar" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+            <rect x="@(GetXCoordinate(index)-GetBarWidth()/2)" y="@GetYCoordinate(p.Value)" height="@GetBarHeight(p.Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@BarColor" class="data-bar" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
         }
     </g>
     @if (showTooltip && tooltipProperties is not null)

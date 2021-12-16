@@ -1,0 +1,29 @@
+﻿.chart {
+    margin-bottom: 2rem;
+}
+
+.tooltip-text {
+    font-size: 10px;
+}
+
+.data-bar {
+    animation: bar-transform 0.8s ease-out;
+    ry: 2;
+    transition: ease-in-out 0.2s;
+}
+
+    .data-bar:hover {
+        filter: brightness(75%);
+        transition: ease-in-out 0.1s;
+    }
+
+
+@keyframes bar-transform {
+    0% {
+        transform: scaleY(10%) translateY(100%);
+    }
+
+    100% {
+        transform: scaleY(100%) translateY(0);
+    }
+}

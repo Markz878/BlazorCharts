@@ -5,13 +5,12 @@ using static System.Math;
 
 namespace BlazorCharts;
 
-public partial class BarChart
+public partial class StackedBarChart
 {
-    [EditorRequired] [Parameter] public IList<BarItem> Data { get; set; } = default!;
+    [EditorRequired] [Parameter] public IList<StackedBarColumn> Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
-    [Parameter] public string BarColor { get; set; } = "red";
-    [Parameter] public string Title { get; set; } = "Bar Chart";
+    [Parameter] public string Title { get; set; } = "Stacked Bar Chart";
 
     private double YMax;
 
@@ -33,7 +32,7 @@ public partial class BarChart
 
     private void SetLimits()
     {
-        YMax = GetLimit(Data.Select(x => x.Value));
+        YMax = GetLimit(Data.Select(x => x.Values.Select(y=>y.Value).Sum()));
         SetMarginLeft(YMax);
     }
 
@@ -76,7 +75,12 @@ public partial class BarChart
         return result;
     }
 
-    private void MouseOver(MouseEventArgs e, BarItem p)
+    //private string GetBarColor(int index)
+    //{
+    //    return MathUtilities.GetColorFromFraction(index / (double)Data[0].Values.Count).ToString();
+    //}
+
+    private void MouseOver(MouseEventArgs e, StackedBarColumn p, int itemIndex)
     {
         //tooltipWidth = GetTooltipWidth(p);
         //tooltipHeight = GetTooltipHeight(p);
@@ -99,7 +103,7 @@ public partial class BarChart
     //    return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
     //}
 
-    private void MouseLeave(MouseEventArgs e, BarItem p)
+    private void MouseLeave(MouseEventArgs e, StackedBarColumn p)
     {
         //showTooltip = false;
     }

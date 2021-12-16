@@ -12,17 +12,17 @@
         double x = 0;
         double y = 0;
         data = Enumerable.Range(0, 500).Select(_ => new ScatterPoint()
+        {
+            X = x = Random.Shared.NextDouble() * 100,
+            Y = y = Random.Shared.NextDouble() * 1000,
+            TooltipProperties = new Dictionary<string, string>
             {
-                X = x = Random.Shared.NextDouble() * 100,
-                Y = y = Random.Shared.NextDouble() * 1000,
-                TooltipProperties = new Dictionary<string, string>
-                {
-                    {"Energian kulutus", $"{x:G3} kWh/m2"},
-                    {"Elinkaarikustannukset", $"{y:G3} t€"},
-                    {"Muuttuja 1", $"{Random.Shared.Next(100,1000)}"},
-                    {"Muuttuja 2", $"{Random.Shared.Next(100,1000)}"},
-                    {"Muuttuja 3", $"{Random.Shared.Next(100,1000)}"},
-                }
-            }).ToList();
+                {"Energian kulutus", $"{x:G3} kWh/m2"},
+                {"Elinkaarikustannukset", $"{y:G3} t€"},
+                {"Muuttuja 1", $"{Random.Shared.Next(100,1000)}"},
+                {"Muuttuja 2", $"{Random.Shared.Next(100,1000)}"},
+                {"Muuttuja 3", $"{Random.Shared.Next(100,1000)}"},
+            }
+        }).ToList();
     }
 }

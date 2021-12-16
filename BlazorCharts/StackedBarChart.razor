@@ -3,7 +3,7 @@
     <g>
         @foreach (double value in YAxis)
         {
-            <line x1="@MarginLeft" y1="@GetYCoordinate(value)" x2="@(Width-MarginRight)" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1="@MarginLeft" y1="@GetYCoordinate(value)" x2="@(Width - MarginRight)" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>
@@ -15,17 +15,22 @@
         }
     </g>
     <g>
-        @foreach(double value in XAxis)
+        @foreach((StackedBarColumn p, int index) in Data.Select((x,i)=>(x,i)))
         {
             <text>
-                <text x="@GetXCoordinate(value)" y="@Height" font-size="12px" text-anchor="middle">@value</text>
+                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@p.Title</text>
             </text>
         }
     </g>
     <g>
-        @foreach(ScatterPoint p in Data)
+        @foreach((StackedBarColumn p, int itemIndex) in Data.Select((x,i)=>(x,i)))
         {
-            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+            double sum = 0;
+            @foreach((StackedBarItem item, int dataIndex) in p.Values.Select((x,i)=>(x,i)))
+            {
+                sum += item.Value;
+                <rect x="@(GetXCoordinate(itemIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(item.Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@item.Color" class="data-bar" @onmouseover="(e)=>MouseOver(e, p, dataIndex)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+            }
         }
     </g>
     @if (showTooltip && tooltipProperties is not null)

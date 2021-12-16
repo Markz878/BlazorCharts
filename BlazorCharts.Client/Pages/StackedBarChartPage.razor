@@ -1,18 +1,18 @@
-﻿@page "/barchart"
+﻿@page "/stackedbarchart"
 
-<PageTitle>Bar Chart</PageTitle>
+<PageTitle>Stacked Bar Chart</PageTitle>
 
 @if(data is not null)
 {
-    <BarChart Data="data"/>
+    <StackedBarChart Data="data"/>
 }
 
 @code {
-    private List<BarItem>? data;
+    private List<StackedBarColumn>? data;
 
     protected override void OnInitialized()
     {
-        data = Enumerable.Range(0,5).Select(x=>new BarItem($"Item {x + 1}", (x+1) * 150)
+        data = Enumerable.Range(0,5).Select(x=>new StackedBarColumn($"Item {x + 1}", new List<StackedBarItem>() { new StackedBarItem((x + 1) * 100, "red"), new StackedBarItem((x + 1) * 200, "yellow") })
         {
             //TooltipProperties = new Dictionary<string, string>
             //{

@@ -1,8 +1,4 @@
-﻿.chart {
-    margin-bottom: 2rem;
-}
-
-.datapoint {
+﻿.datapoint {
     animation: kaboom 0.8s ease-out;
     fill: red;
     r: 4;
@@ -20,10 +16,6 @@
     fill: rgb(240, 240, 240);
     stroke-width: 1;
     stroke: rgba(0,0,0,0.9);
-}
-
-.tooltip-text {
-    font-size: 10px;
 }
 
 @keyframes kaboom {

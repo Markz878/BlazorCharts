@@ -1,9 +1,9 @@
-﻿namespace BlazorCharts;
+﻿namespace BlazorCharts.PlotDataModels;
 
 public class BarItem
 {
-    public string Title { get; set; }
-    public double Value { get; set; }
+    public string Title { get; }
+    public double Value { get; }
 
     public BarItem(string title, double value)
     {

@@ -1,4 +1,4 @@
-﻿namespace BlazorCharts;
+﻿namespace BlazorCharts.PlotDataModels;
 
 public class ScatterPoint
 {
