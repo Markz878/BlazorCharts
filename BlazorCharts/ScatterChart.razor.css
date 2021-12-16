@@ -1,0 +1,37 @@
+﻿.chart {
+    margin-bottom: 2rem;
+}
+
+.datapoint {
+    animation: kaboom 0.8s ease-out;
+    fill: red;
+    r: 4;
+    transition: ease-in-out 0.2s;
+}
+
+    .datapoint:hover {
+        fill: darkred;
+        r: 5;
+        transition: ease-in-out 0.2s;
+    }
+
+.scatter-tooltip {
+    rx: 15;
+    fill: rgb(240, 240, 240);
+    stroke-width: 1;
+    stroke: rgba(0,0,0,0.9);
+}
+
+.tooltip-text {
+    font-size: 10px;
+}
+
+@keyframes kaboom {
+    0% {
+        transform: translateY(90%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

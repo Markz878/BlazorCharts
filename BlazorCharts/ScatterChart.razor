@@ -1,0 +1,42 @@
+﻿<svg class="chart" width="100%" height="90%" viewBox="0 0 @Width @Height">
+    <g>
+        @foreach (double value in YAxis)
+        {
+            <line x1="@MarginX" y1="@GetYCoordinate(value)" x2="@(Width-MarginX)" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
+        }
+    </g>
+    <g>
+        @foreach(double value in YAxis)
+        {
+            <text>
+                <text x="@(MarginX-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
+            </text>
+        }
+    </g>
+    <g>
+        @foreach(double value in XAxis)
+        {
+            <text>
+                <text x="@GetXCoordinate(value)" y="@Height" font-size="12px" text-anchor="middle">@value</text>
+            </text>
+        }
+    </g>
+    <g>
+        @foreach(ScatterPoint p in Data)
+        {
+            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+        }
+    </g>
+    @if (showTooltip && tooltipProperties is not null)
+    {
+        <g>
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip"/>
+            @foreach((string text, int index) in tooltipProperties)
+            {
+                <text>
+                    <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
+                </text>
+            }
+        </g>
+    }
+</svg>

@@ -1,0 +1,42 @@
+﻿<svg class="chart" width="100%" height="90%" viewBox="0 0 @Width @Height">
+    <g>
+        @foreach (double value in YAxis)
+        {
+            <line x1="@MarginX" y1="@GetYCoordinate(value)" x2="@Width" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
+        }
+    </g>
+    <g>
+        @foreach(double value in YAxis)
+        {
+            <text>
+                <text x="@(MarginX-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
+            </text>
+        }
+    </g>
+    <g>
+        @foreach((BarItem p, int index) in Data.Select((x,i)=>(x,i)))
+        {
+            <text>
+                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@p.Title</text>
+            </text>
+        }
+    </g>
+    <g>
+        @foreach((BarItem p, int index) in Data.Select((x,i)=>(x,i)))
+        {
+            <rect x="@(GetXCoordinate(index)-GetBarWidth()/2)" y="@GetYCoordinate(p.Value)" height="@GetBarHeight(p.Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="red" class="data-bar" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+        }
+    </g>
+    @if (showTooltip && tooltipProperties is not null)
+    {
+        <g>
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip"/>
+            @foreach((string text, int index) in tooltipProperties)
+            {
+                <text>
+                    <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
+                </text>
+            }
+        </g>
+    }
+</svg>
