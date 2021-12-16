@@ -8,20 +8,12 @@
 }
 
 @code {
-    private List<StackedBarColumn>? data;
+    private StackedBarSeries? data;
 
     protected override void OnInitialized()
     {
-        data = Enumerable.Range(0,5).Select(x=>new StackedBarColumn($"Item {x + 1}", new List<StackedBarItem>() { new StackedBarItem((x + 1) * 100, "red"), new StackedBarItem((x + 1) * 200, "yellow") })
-        {
-            //TooltipProperties = new Dictionary<string, string>
-            //{
-            //    {"Energian kulutus", $"{Random.Shared.Next(50,250)} kWh/m2"},
-            //    {"Elinkaarikustannukset", $"{Random.Shared.Next(100,1000)} 000 t€"},
-            //    {"Muuttuja 1", $"{Random.Shared.Next(100,1000)}"},
-            //    {"Muuttuja 2", $"{Random.Shared.Next(100,1000)}"},
-            //    {"Muuttuja 3", $"{Random.Shared.Next(100,1000)}"},
-            //}
-        }).ToList();
+        data = new StackedBarSeries(Enumerable.Range(0, 5).Select(x => $"Item {x}").ToList(),
+            new StackedBarSerie("red", Enumerable.Range(0, 5).Select(x => (x + 1) * 100d).ToList()),
+            new StackedBarSerie("blue", Enumerable.Range(0, 5).Select(x => (x + 1) * 200d).ToList()));
     }
 }

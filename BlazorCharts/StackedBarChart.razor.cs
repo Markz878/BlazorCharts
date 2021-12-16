@@ -7,7 +7,7 @@ namespace BlazorCharts;
 
 public partial class StackedBarChart
 {
-    [EditorRequired] [Parameter] public IList<StackedBarColumn> Data { get; set; } = default!;
+    [EditorRequired] [Parameter] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
     [Parameter] public string Title { get; set; } = "Stacked Bar Chart";
@@ -32,8 +32,21 @@ public partial class StackedBarChart
 
     private void SetLimits()
     {
-        YMax = GetLimit(Data.Select(x => x.Values.Select(y=>y.Value).Sum()));
+        YMax = GetLimit(getElementWiseSum(Data));
         SetMarginLeft(YMax);
+
+        static IEnumerable<double> getElementWiseSum(StackedBarSeries Data)
+        {
+            for (int i = 0; i < Data.Titles.Count; i++)
+            {
+                double sum = 0;
+                for (int j = 0; j < Data.Series.Count; j++)
+                {
+                    sum += Data.Series[j].Values[i];
+                }
+                yield return sum;
+            }
+        }
     }
 
     private void SetMarginLeft(double ymax)
@@ -54,13 +67,13 @@ public partial class StackedBarChart
 
     private double GetXCoordinate(int order)
     {
-        double result = MarginLeft + 50 + order * Width / Data.Count;
+        double result = MarginLeft + 50 + order * Width / Data.Titles.Count;
         return result;
     }
 
     private double GetBarWidth()
     {
-        return Max(Width / Data.Count * 0.3, 25);
+        return Max(Width / Data.Titles.Count * 0.3, 25);
     }
 
     private double GetBarHeight(double value)
@@ -80,7 +93,7 @@ public partial class StackedBarChart
     //    return MathUtilities.GetColorFromFraction(index / (double)Data[0].Values.Count).ToString();
     //}
 
-    private void MouseOver(MouseEventArgs e, StackedBarColumn p, int itemIndex)
+    private void MouseOver(MouseEventArgs e, StackedBarSerie p, int columnIndex)
     {
         //tooltipWidth = GetTooltipWidth(p);
         //tooltipHeight = GetTooltipHeight(p);
@@ -103,7 +116,7 @@ public partial class StackedBarChart
     //    return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
     //}
 
-    private void MouseLeave(MouseEventArgs e, StackedBarColumn p)
+    private void MouseLeave()
     {
         //showTooltip = false;
     }

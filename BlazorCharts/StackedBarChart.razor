@@ -15,21 +15,23 @@
         }
     </g>
     <g>
-        @foreach((StackedBarColumn p, int index) in Data.Select((x,i)=>(x,i)))
+        @foreach((string title, int index) in Data.Titles.Select((x,i)=>(x,i)))
         {
             <text>
-                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@p.Title</text>
+                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@title</text>
             </text>
         }
     </g>
     <g>
-        @foreach((StackedBarColumn p, int itemIndex) in Data.Select((x,i)=>(x,i)))
+        @for(int i = 0; i < Data.Titles.Count; i++)@* in Data.Series.Select((x,i)=>(x,i)))*@
         {
+            int columnIndex = i;
             double sum = 0;
-            @foreach((StackedBarItem item, int dataIndex) in p.Values.Select((x,i)=>(x,i)))
+            @for(int j = 0; j < Data.Series.Count; j++)
             {
-                sum += item.Value;
-                <rect x="@(GetXCoordinate(itemIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(item.Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@item.Color" class="data-bar" @onmouseover="(e)=>MouseOver(e, p, dataIndex)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+                int itemIndex = j;
+                sum += Data.Series[itemIndex].Values[columnIndex];
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[itemIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[itemIndex].Color" class="data-bar" @onmouseover="(e)=>MouseOver(e, Data.Series[itemIndex], itemIndex)" @onmouseout="MouseLeave"/>
             }
         }
     </g>
