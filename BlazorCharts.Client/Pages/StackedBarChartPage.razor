@@ -12,8 +12,11 @@
 
     protected override void OnInitialized()
     {
-        data = new StackedBarSeries(Enumerable.Range(0, 5).Select(x => $"Item {x}").ToList(),
-            new StackedBarSerie("red", Enumerable.Range(0, 5).Select(x => (x + 1) * 100d).ToList()),
-            new StackedBarSerie("blue", Enumerable.Range(0, 5).Select(x => (x + 1) * 200d).ToList()));
+        data = new StackedBarSeries(Enumerable.Range(0, 9).Select(x => $"Item number {(x%2==0 ? "afafafafafqfffafafa" : "")}").ToList(),
+            new StackedBarSerie("Red series", "rgba(255,50,15,0.75)", Enumerable.Range(0, 9).Select(x => (x + 1) * 100d).ToList()),
+            new StackedBarSerie("Blue series", "rgba(0,50,255,0.75)", Enumerable.Range(0, 9).Select(x => (x + 1) * 200d).ToList()))
+            {
+                ShowLabels = true
+            };
     }
 }

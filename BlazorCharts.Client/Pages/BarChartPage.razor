@@ -14,14 +14,14 @@
     {
         data = Enumerable.Range(0,5).Select(x=>new BarItem($"Item {x + 1}", (x+1) * 150)
         {
-            //TooltipProperties = new Dictionary<string, string>
-            //{
-            //    {"Energian kulutus", $"{Random.Shared.Next(50,250)} kWh/m2"},
-            //    {"Elinkaarikustannukset", $"{Random.Shared.Next(100,1000)} 000 t€"},
-            //    {"Muuttuja 1", $"{Random.Shared.Next(100,1000)}"},
-            //    {"Muuttuja 2", $"{Random.Shared.Next(100,1000)}"},
-            //    {"Muuttuja 3", $"{Random.Shared.Next(100,1000)}"},
-            //}
+            TooltipProperties = new Dictionary<string, string>
+            {
+                {"Energian kulutus", $"{Random.Shared.Next(50,250)} kWh/m2"},
+                {"Elinkaarikustannukset", $"{Random.Shared.Next(100,1000)} 000 t€"},
+                {"Muuttuja 1", $"{Random.Shared.Next(100,1000)}"},
+                {"Muuttuja 2", $"{Random.Shared.Next(100,1000)}"},
+                {"Muuttuja 3", $"{Random.Shared.Next(100,1000)}"},
+            }
         }).ToList();
     }
 }

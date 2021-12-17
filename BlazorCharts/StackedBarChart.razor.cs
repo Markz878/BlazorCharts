@@ -10,6 +10,7 @@ public partial class StackedBarChart
     [EditorRequired] [Parameter] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
+    [Parameter] public string MaxWidth { get; set; } = "900px";
     [Parameter] public string Title { get; set; } = "Stacked Bar Chart";
 
     private double YMax;
@@ -20,9 +21,9 @@ public partial class StackedBarChart
     private double tooltipHeight;
     private double tooltipWidth;
     private double MarginLeft = 30;
-    private const double MarginRight = 10;
+    private double MarginRight = 30;
     private const double MarginTop = 30;
-    private const double MarginBottom = 20;
+    private const double MarginBottom = 50;
     private IEnumerable<(string text, int index)>? tooltipProperties;
 
     protected override void OnParametersSet()
@@ -34,6 +35,7 @@ public partial class StackedBarChart
     {
         YMax = GetLimit(getElementWiseSum(Data));
         SetMarginLeft(YMax);
+        SetMarginRight();
 
         static IEnumerable<double> getElementWiseSum(StackedBarSeries Data)
         {
@@ -49,13 +51,19 @@ public partial class StackedBarChart
         }
     }
 
+    private void SetMarginRight()
+    {
+        int lastTitleWidth = GetTextPixelWidth(Data.Titles[^1], GetTitleFontsize());
+        MarginRight = Max(lastTitleWidth - 90, 10);
+    }
+
     private void SetMarginLeft(double ymax)
     {
         double order = Round(Log10(ymax));
         MarginLeft = order * 10 + 10;
     }
 
-    private double GetLimit(IEnumerable<double> values)
+    private static double GetLimit(IEnumerable<double> values)
     {
         double maxVal = values.Max();
         double order = Pow(10, Round(Log10(maxVal)));
@@ -67,13 +75,14 @@ public partial class StackedBarChart
 
     private double GetXCoordinate(int order)
     {
-        double result = MarginLeft + 50 + order * Width / Data.Titles.Count;
+        double barWidth = GetBarWidth();
+        double result = MarginLeft + barWidth + (double)order / (Data.Titles.Count - 1) * (Width - MarginLeft - MarginRight - 2 * barWidth);
         return result;
     }
 
     private double GetBarWidth()
     {
-        return Max(Width / Data.Titles.Count * 0.3, 25);
+        return Max(Width / Data.Titles.Count * 0.3, 35);
     }
 
     private double GetBarHeight(double value)
@@ -88,11 +97,52 @@ public partial class StackedBarChart
         return result;
     }
 
-    //private string GetBarColor(int index)
-    //{
-    //    return MathUtilities.GetColorFromFraction(index / (double)Data[0].Values.Count).ToString();
-    //}
+    private double GetXOffsetBetweenColumns()
+    {
+        double barWidth = GetBarWidth();
+        double result = 1d / (Data.Titles.Count - 1) * (Width - MarginLeft - MarginRight - 2 * barWidth);
+        return result;
+    }
 
+    private static int GetTextPixelWidth(string text, int fontsize)
+    {
+        return text.Length * fontsize / 2;
+    }
+
+    private int GetTitleFontsize()
+    {
+        double xOffset = GetXOffsetBetweenColumns();
+        int fontSize = 12;
+        bool passed = false;
+        while (!passed)
+        {
+            passed = true;
+            for (int i = 0; i < Data.Titles.Count - 1; i++)
+            {
+                if (GetTextPixelWidth(Data.Titles[i], fontSize) / 2 + GetTextPixelWidth(Data.Titles[i + 1], fontSize) / 2 > xOffset * 0.9)
+                {
+                    fontSize--;
+                    if (fontSize < 9)
+                    {
+                        return fontSize;
+                    }
+                    passed = false;
+                    break;
+                }
+            }
+        }
+        return fontSize;
+    }
+
+    private string GetTitleTransform(int index)
+    {
+        int maxTitleLength = Data.Titles.Max(x => x.Length);
+        double x = GetXCoordinate(index);
+        double y = Height - MarginBottom + 20;
+        int size = GetTitleFontsize();
+        int rotation = size >= 9 ? 0 : -8;
+        return $"rotate({rotation},{x},{y})";
+    }
     private void MouseOver(MouseEventArgs e, StackedBarSerie p, int columnIndex)
     {
         //tooltipWidth = GetTooltipWidth(p);

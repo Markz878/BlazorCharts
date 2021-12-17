@@ -3,4 +3,29 @@
     fill: rgb(240, 240, 240);
     stroke-width: 1;
     stroke: rgba(0,0,0,0.9);
+    pointer-events: none;
+}
+
+.data-label {
+    pointer-events: none;
+    text-anchor: middle;
+}
+
+.legend-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 10px;
+}
+
+.marker-box {
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    margin-top: 2px;
+}
+
+.marker-text {
+    margin-left: 2px;
+    margin-right: 1rem;
 }

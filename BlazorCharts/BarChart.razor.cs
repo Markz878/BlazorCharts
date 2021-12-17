@@ -43,7 +43,7 @@ public partial class BarChart
         MarginLeft = order * 10 + 10;
     }
 
-    private double GetLimit(IEnumerable<double> values)
+    private static double GetLimit(IEnumerable<double> values)
     {
         double maxVal = values.Max();
         double order = Pow(10, Round(Log10(maxVal)));
@@ -53,15 +53,16 @@ public partial class BarChart
 
     private IEnumerable<double> YAxis => Enumerable.Range(0, 11).Select(x => YMax * x / 10);
 
-    private double GetXCoordinate(int order)
+    private double GetXCoordinate(int index)
     {
-        double result = MarginLeft + 50 + order * Width / Data.Count;
+        double barWidth = GetBarWidth();
+        double result = MarginLeft + barWidth + (double)index / (Data.Count - 1) * (Width - MarginLeft - MarginRight - 2 * barWidth);
         return result;
     }
 
     private double GetBarWidth()
     {
-        return Max(Width / Data.Count * 0.3, 25);
+        return Max(Width / Data.Count * 0.3, 35);
     }
 
     private double GetBarHeight(double value)
@@ -76,31 +77,33 @@ public partial class BarChart
         return result;
     }
 
-    private void MouseOver(MouseEventArgs e, BarItem p)
+    private void MouseOver(MouseEventArgs e, BarItem p, int index)
     {
-        //tooltipWidth = GetTooltipWidth(p);
-        //tooltipHeight = GetTooltipHeight(p);
-        //double x = GetXCoordinate(p.X);
-        //double y = GetYCoordinate(p.Y);
-        //tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
-        //tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
-        //tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
-        //showTooltip = true;
-        //Console.WriteLine($"Screen {e.ScreenX},{e.ScreenY} Client {e.ClientX},{e.ClientY} Page {e.PageX},{e.PageY} Offset {e.OffsetX},{e.OffsetY}");
+        if (p.TooltipProperties.Any())
+        {
+            tooltipWidth = GetTooltipWidth(p);
+            tooltipHeight = GetTooltipHeight(p);
+            double x = GetXCoordinate(index) + (index < Data.Count / 2 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            double y = GetYCoordinate(p.Value);
+            tooltipX = index < Data.Count / 2 ? x : x - tooltipWidth;
+            tooltipY = Height * 0.6; /*p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;*/
+            tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
+            showTooltip = true;
+        }
     }
 
-    //private double GetTooltipHeight(ScatterPoint p)
-    //{
-    //    return p.TooltipProperties.Count * 18 + 5;
-    //}
+    private static double GetTooltipHeight(BarItem p)
+    {
+        return p.TooltipProperties.Count * 18 + 5;
+    }
 
-    //private double GetTooltipWidth(ScatterPoint p)
-    //{
-    //    return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
-    //}
+    private static double GetTooltipWidth(BarItem p)
+    {
+        return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
+    }
 
     private void MouseLeave(MouseEventArgs e, BarItem p)
     {
-        //showTooltip = false;
+        showTooltip = false;
     }
 }

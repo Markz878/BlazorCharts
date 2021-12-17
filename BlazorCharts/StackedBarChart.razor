@@ -1,4 +1,4 @@
-﻿<svg class="chart" width="100%" height="90%" viewBox="0 0 @Width @Height">
+﻿<svg class="chart" viewBox="0 0 @Width @Height" style="width: min(100%, @MaxWidth);">
     <text x="@(Width/2)" y="15" font-size="16px" text-anchor="middle">@Title</text>
     <g>
         @foreach (double value in YAxis)
@@ -7,7 +7,7 @@
         }
     </g>
     <g>
-        @foreach(double value in YAxis)
+        @foreach (double value in YAxis)
         {
             <text>
                 <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
@@ -15,31 +15,59 @@
         }
     </g>
     <g>
-        @foreach((string title, int index) in Data.Titles.Select((x,i)=>(x,i)))
+        @foreach ((string title, int index) in Data.Titles.Select((x, i) => (x, i)))
         {
             <text>
-                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@title</text>
+                <text x="@GetXCoordinate(index)" y="@(Height-MarginBottom+20)" font-size="@GetTitleFontsize()" transform="@GetTitleTransform(index)" text-anchor="middle" class="monospaced">@title</text>
             </text>
         }
     </g>
     <g>
-        @for(int i = 0; i < Data.Titles.Count; i++)@* in Data.Series.Select((x,i)=>(x,i)))*@
+        @for (int i = 0; i < Data.Titles.Count; i++)
         {
             int columnIndex = i;
             double sum = 0;
-            @for(int j = 0; j < Data.Series.Count; j++)
+            @for (int j = 0; j < Data.Series.Count; j++)
             {
-                int itemIndex = j;
-                sum += Data.Series[itemIndex].Values[columnIndex];
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[itemIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[itemIndex].Color" class="data-bar" @onmouseover="(e)=>MouseOver(e, Data.Series[itemIndex], itemIndex)" @onmouseout="MouseLeave"/>
+                int serieIndex = j;
+                sum += Data.Series[serieIndex].Values[columnIndex];
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" class="data-bar bar-animation" @onmouseover="(e)=>MouseOver(e, Data.Series[serieIndex], serieIndex)" @onmouseout="MouseLeave" />
             }
         }
+        @if (Data.ShowLabels)
+        {
+            @for (int i = 0; i < Data.Titles.Count; i++)
+            {
+                int columnIndex = i;
+                double sum = 0;
+                @for (int j = 0; j < Data.Series.Count; j++)
+                {
+                    int serieIndex = j;
+                    sum += Data.Series[serieIndex].Values[columnIndex];
+                    <text>
+                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex])/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animation">@Data.Series[serieIndex].Values[columnIndex].ToString("G3")</text>
+                    </text>
+                }
+            }
+        }
+    </g>
+    <g>
+        <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
+            <div class="legend-container">
+                @for (int i = 0; i < Data.Series.Count; i++)
+                {
+                    int index = i;
+                    <div class="marker-box" style="background: @Data.Series[index].Color"></div>
+                    <div class="marker-text">@Data.Series[index].Title</div>
+                }
+            </div>
+        </foreignObject>
     </g>
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip"/>
-            @foreach((string text, int index) in tooltipProperties)
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip" />
+            @foreach ((string text, int index) in tooltipProperties)
             {
                 <text>
                     <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
