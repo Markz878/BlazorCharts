@@ -15,23 +15,23 @@
         }
     </g>
     <g>
-        @foreach((BarItem p, int index) in Data.Select((x,i)=>(x,i)))
+        @foreach(double value in XAxis)
         {
             <text>
-                <text x="@GetXCoordinate(index)" y="@Height" font-size="12px" text-anchor="middle">@p.Title</text>
+                <text x="@GetXCoordinate(value)" y="@Height" font-size="12px" text-anchor="middle">@value</text>
             </text>
         }
     </g>
     <g>
-        @foreach((BarItem p, int index) in Data.Select((x,i)=>(x,i)))
+        @foreach(ScatterPoint p in Data)
         {
-            <rect x="@(GetXCoordinate(index)-GetBarWidth()/2)" y="@GetYCoordinate(p.Value)" height="@GetBarHeight(p.Value)" width="@GetBarWidth()" rx="2" stroke="black" stroke-width="1" fill="@BarColor" class="data-bar bar-animation" @onmouseover="()=>MouseOver(p, index)" @onmouseout="()=>MouseLeave()"/>
+            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
         }
     </g>
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="5" class="tooltip"/>
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
             @foreach((string text, int index) in tooltipProperties)
             {
                 <text>
@@ -41,3 +41,4 @@
         </g>
     }
 </svg>
+

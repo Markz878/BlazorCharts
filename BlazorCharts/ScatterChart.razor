@@ -31,13 +31,14 @@
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
-            @foreach((string text, int index) in tooltipProperties)
-            {
-                <text>
-                    <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
-                </text>
-            }
+            <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
+                <div class="tooltip-container" style="transform: translate(@tooltipX, @tooltipY) translate(@tooltipXTranslate, @tooltipYTranslate)">
+                    @foreach(string tt in tooltipProperties)
+                    {
+                        <p class="tooltip-text">@tt</p>
+                    }
+                </div>
+            </foreignObject>
         </g>
     }
 </svg>

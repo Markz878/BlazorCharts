@@ -1,6 +1,5 @@
 ﻿using BlazorCharts.PlotDataModels;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using static System.Math;
 
 namespace BlazorCharts;
@@ -23,7 +22,8 @@ public partial class StackedBarChart
     private double MarginRight = 30;
     private const double MarginTop = 30;
     private const double MarginBottom = 50;
-    private IEnumerable<(string text, int index)>? tooltipProperties;
+    //private IEnumerable<(string text, int index)>? tooltipProperties;
+    private IEnumerable<string>? tooltipProperties;
 
     protected override void OnParametersSet()
     {
@@ -43,7 +43,7 @@ public partial class StackedBarChart
                 double sum = 0;
                 for (int j = 0; j < Data.Series.Count; j++)
                 {
-                    sum += Data.Series[j].Values[i];
+                    sum += Data.Series[j].Values[i].Value;
                 }
                 yield return sum;
             }
@@ -142,31 +142,35 @@ public partial class StackedBarChart
         int rotation = size >= 9 ? 0 : -8;
         return $"rotate({rotation},{x},{y})";
     }
-    private void MouseOver(MouseEventArgs e, StackedBarSerie p, int columnIndex)
+
+    private void MouseOver(StackedBarItem p, int index)
     {
-        //tooltipWidth = GetTooltipWidth(p);
-        //tooltipHeight = GetTooltipHeight(p);
-        //double x = GetXCoordinate(p.X);
-        //double y = GetYCoordinate(p.Y);
-        //tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
-        //tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
-        //tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
-        //showTooltip = true;
-        //Console.WriteLine($"Screen {e.ScreenX},{e.ScreenY} Client {e.ClientX},{e.ClientY} Page {e.PageX},{e.PageY} Offset {e.OffsetX},{e.OffsetY}");
+        if (p.TooltipProperties.Any())
+        {
+            tooltipWidth = GetTooltipWidth(p);
+            tooltipHeight = GetTooltipHeight(p);
+            double x = GetXCoordinate(index) + (index < Data.Titles.Count / 2 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            double y = GetYCoordinate(p.Value);
+            tooltipX = index < Data.Titles.Count / 2 ? x : x - tooltipWidth;
+            tooltipY = Height * 0.6; /*p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;*/
+            //tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
+            tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+            showTooltip = true;
+        }
     }
 
-    //private double GetTooltipHeight(ScatterPoint p)
-    //{
-    //    return p.TooltipProperties.Count * 18 + 5;
-    //}
+    private static double GetTooltipHeight(StackedBarItem p)
+    {
+        return p.TooltipProperties.Count * 18 + 5;
+    }
 
-    //private double GetTooltipWidth(ScatterPoint p)
-    //{
-    //    return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
-    //}
+    private static double GetTooltipWidth(StackedBarItem p)
+    {
+        return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
+    }
 
     private void MouseLeave()
     {
-        //showTooltip = false;
+        showTooltip = false;
     }
 }

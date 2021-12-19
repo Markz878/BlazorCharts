@@ -30,8 +30,8 @@
             @for (int j = 0; j < Data.Series.Count; j++)
             {
                 int serieIndex = j;
-                sum += Data.Series[serieIndex].Values[columnIndex];
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-bar bar-animation" @onmouseover="(e)=>MouseOver(e, Data.Series[serieIndex], serieIndex)" @onmouseout="MouseLeave" />
+                sum += Data.Series[serieIndex].Values[columnIndex].Value;
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-bar bar-animation" @onmouseover="()=>MouseOver(Data.Series[serieIndex].Values[columnIndex], serieIndex)" @onmouseout="MouseLeave" />
             }
         }
         @if (Data.ShowLabels)
@@ -43,9 +43,9 @@
                 @for (int j = 0; j < Data.Series.Count; j++)
                 {
                     int serieIndex = j;
-                    sum += Data.Series[serieIndex].Values[columnIndex];
+                    sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex])/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animation">@Data.Series[serieIndex].Values[columnIndex].ToString("G3")</text>
+                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animation">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G3")</text>
                     </text>
                 }
             }
@@ -66,11 +66,11 @@
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip" />
-            @foreach ((string text, int index) in tooltipProperties)
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="tooltip" />
+            @foreach (string text in tooltipProperties)
             {
                 <text>
-                    <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
+                    @*<text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>*@
                 </text>
             }
         </g>

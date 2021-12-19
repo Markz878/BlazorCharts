@@ -15,6 +15,18 @@
     stroke: rgba(0,0,0,0.9);
 }
 
+.tooltip-container {
+    display: inline-block;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2px 5px;
+}
+
+.tooltip-text {
+    margin: 0 4px;
+}
+
 @keyframes kaboom {
     0% {
         transform: translateY(90%);

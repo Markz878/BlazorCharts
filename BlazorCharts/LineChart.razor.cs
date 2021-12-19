@@ -1,10 +1,11 @@
-﻿using BlazorCharts.PlotDataModels;
+using BlazorCharts.PlotDataModels;
 using Microsoft.AspNetCore.Components;
 using static System.Math;
 
+
 namespace BlazorCharts
 {
-    public partial class ScatterChart
+    public partial class LineChart
     {
         [EditorRequired] [Parameter] public IList<ScatterPoint> Data { get; set; } = default!;
         [Parameter] public double Width { get; set; } = 700;
@@ -16,17 +17,16 @@ namespace BlazorCharts
         private double YMin;
         private double YMax;
 
+        private bool showTooltip;
+        private double tooltipX;
+        private double tooltipY;
+        private double tooltipHeight;
+        private double tooltipWidth;
         private double MarginLeft = 30;
         private const double MarginRight = 10;
         private const double MarginTop = 30;
         private const double MarginBottom = 20;
-
-        private bool showTooltip;
-        private string? tooltipX;
-        private string? tooltipY;
-        private string? tooltipXTranslate;
-        private string? tooltipYTranslate;
-        private IEnumerable<string>? tooltipProperties;
+        private IEnumerable<(string text, int index)>? tooltipProperties;
 
         protected override void OnParametersSet()
         {
@@ -49,7 +49,7 @@ namespace BlazorCharts
             MarginLeft = order * 10 + 10;
         }
 
-        private static (double min, double max) GetLimits(IEnumerable<double> values)
+        private (double min, double max) GetLimits(IEnumerable<double> values)
         {
             double minVal = values.Min();
             double maxVal = values.Max();
@@ -77,14 +77,26 @@ namespace BlazorCharts
 
         private void MouseOver(ScatterPoint p)
         {
+            tooltipWidth = GetTooltipWidth(p);
+            tooltipHeight = GetTooltipHeight(p);
             double x = GetXCoordinate(p.X);
             double y = GetYCoordinate(p.Y);
-            tooltipX = $"{x}px";
-            tooltipY = $"{y}px";
-            tooltipXTranslate = x < Width/ 2 ? "0" : "-100%";
-            tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
-            tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+            tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
+            tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
+            tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
             showTooltip = true;
+        }
+
+        private double GetTooltipHeight(ScatterPoint p)
+        {
+            return p.TooltipProperties.Count * 18 + 5;
+        }
+
+        private double GetTooltipWidth(ScatterPoint p)
+        {
+            KeyValuePair<string, string> maxLenProperty = p.TooltipProperties.MaxBy(x => x.Key.Length + x.Value.Length);
+            Console.WriteLine($"Value {maxLenProperty.Key}:{maxLenProperty.Value} has length {maxLenProperty.Key.Length + maxLenProperty.Value.Length}");
+            return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.65;
         }
 
         private void MouseLeave()

@@ -13,8 +13,14 @@
     protected override void OnInitialized()
     {
         data = new StackedBarSeries(Enumerable.Range(0, 9).Select(x => $"Item number {(x%2==0 ? "afafafafafqfffafafa" : "")}").ToList(),
-            new StackedBarSerie("Red series", "rgba(255,50,15,0.75)", Enumerable.Range(0, 9).Select(x => (x + 1) * 100d).ToList()),
-            new StackedBarSerie("Blue series", "rgba(0,50,255,0.75)", Enumerable.Range(0, 9).Select(x => (x + 1) * 200d).ToList()))
+            new StackedBarSerie("Red series", "rgba(255,50,15,0.75)", Enumerable.Range(0, 9).Select(x => new StackedBarItem((x + 1) * 100d)
+            {
+                TooltipProperties = new Dictionary<string, string>(){{"Item Info", "Some info"}}
+            }).ToList()),
+            new StackedBarSerie("Blue series", "rgba(0,50,255,0.75)", Enumerable.Range(0, 9).Select(x => new StackedBarItem((x + 1) * 200d)
+            {
+                TooltipProperties = new Dictionary<string, string>(){{"Item Info", "Some info"}}
+            }).ToList()))
             {
                 ShowLabels = true
             };

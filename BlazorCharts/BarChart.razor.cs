@@ -1,6 +1,5 @@
 ﻿using BlazorCharts.PlotDataModels;
 using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using static System.Math;
 
 namespace BlazorCharts;
@@ -84,9 +83,8 @@ public partial class BarChart
             tooltipWidth = GetTooltipWidth(p);
             tooltipHeight = GetTooltipHeight(p);
             double x = GetXCoordinate(index) + (index < Data.Count / 2 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
-            double y = GetYCoordinate(p.Value);
             tooltipX = index < Data.Count / 2 ? x : x - tooltipWidth;
-            tooltipY = Height * 0.6; /*p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;*/
+            tooltipY = Height * 0.6;
             tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
             showTooltip = true;
         }
