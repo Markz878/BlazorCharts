@@ -75,7 +75,7 @@ namespace BlazorCharts
             return result;
         }
 
-        private void MouseOver(MouseEventArgs e, ScatterPoint p)
+        private void MouseOver(ScatterPoint p)
         {
             tooltipWidth = GetTooltipWidth(p);
             tooltipHeight = GetTooltipHeight(p);
@@ -85,7 +85,6 @@ namespace BlazorCharts
             tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
             tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
             showTooltip = true;
-            //Console.WriteLine($"Screen {e.ScreenX},{e.ScreenY} Client {e.ClientX},{e.ClientY} Page {e.PageX},{e.PageY} Offset {e.OffsetX},{e.OffsetY}");
         }
 
         private double GetTooltipHeight(ScatterPoint p)
@@ -100,7 +99,7 @@ namespace BlazorCharts
             return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.65;
         }
 
-        private void MouseLeave(MouseEventArgs e, ScatterPoint p)
+        private void MouseLeave()
         {
             showTooltip = false;
         }

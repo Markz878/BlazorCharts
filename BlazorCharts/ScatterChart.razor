@@ -25,13 +25,13 @@
     <g>
         @foreach(ScatterPoint p in Data)
         {
-            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="(e)=>MouseOver(e, p)" @onmouseout="(e)=>MouseLeave(e, p)"/>
+            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
         }
     </g>
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="scatter-tooltip"/>
+            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
             @foreach((string text, int index) in tooltipProperties)
             {
                 <text>

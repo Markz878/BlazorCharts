@@ -77,7 +77,7 @@ public partial class BarChart
         return result;
     }
 
-    private void MouseOver(MouseEventArgs e, BarItem p, int index)
+    private void MouseOver(BarItem p, int index)
     {
         if (p.TooltipProperties.Any())
         {
@@ -102,7 +102,7 @@ public partial class BarChart
         return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
     }
 
-    private void MouseLeave(MouseEventArgs e, BarItem p)
+    private void MouseLeave()
     {
         showTooltip = false;
     }

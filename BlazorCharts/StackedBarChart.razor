@@ -1,4 +1,4 @@
-﻿<svg class="chart" viewBox="0 0 @Width @Height" style="width: min(100%, @MaxWidth);">
+﻿<svg class="chart" viewBox="0 0 @Width @Height">
     <text x="@(Width/2)" y="15" font-size="16px" text-anchor="middle">@Title</text>
     <g>
         @foreach (double value in YAxis)
@@ -31,7 +31,7 @@
             {
                 int serieIndex = j;
                 sum += Data.Series[serieIndex].Values[columnIndex];
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" class="data-bar bar-animation" @onmouseover="(e)=>MouseOver(e, Data.Series[serieIndex], serieIndex)" @onmouseout="MouseLeave" />
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex])" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-bar bar-animation" @onmouseover="(e)=>MouseOver(e, Data.Series[serieIndex], serieIndex)" @onmouseout="MouseLeave" />
             }
         }
         @if (Data.ShowLabels)

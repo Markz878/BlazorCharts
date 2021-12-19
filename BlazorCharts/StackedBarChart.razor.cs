@@ -10,7 +10,6 @@ public partial class StackedBarChart
     [EditorRequired] [Parameter] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
-    [Parameter] public string MaxWidth { get; set; } = "900px";
     [Parameter] public string Title { get; set; } = "Stacked Bar Chart";
 
     private double YMax;
