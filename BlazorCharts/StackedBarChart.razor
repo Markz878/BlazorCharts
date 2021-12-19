@@ -31,7 +31,7 @@
             {
                 int serieIndex = j;
                 sum += Data.Series[serieIndex].Values[columnIndex].Value;
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-item bar-animate" @onmouseover="()=>MouseOver(Data.Series[serieIndex].Values[columnIndex], columnIndex)" @onmouseout="MouseLeave" />
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-item bar-animate" @onmouseover="()=>MouseOver(serieIndex, columnIndex)" @onmouseout="MouseLeave" />
             }
         }
         @if (Data.ShowLabels)

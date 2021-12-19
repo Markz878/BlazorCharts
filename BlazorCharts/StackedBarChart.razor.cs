@@ -133,28 +133,34 @@ public partial class StackedBarChart
         return fontSize;
     }
 
-    private string GetTitleTransform(int index)
+    private string GetTitleTransform(int columnIndex)
     {
         int maxTitleLength = Data.Titles.Max(x => x.Length);
-        double x = GetXCoordinate(index);
+        double x = GetXCoordinate(columnIndex);
         double y = Height - MarginBottom + 20;
         int size = GetTitleFontsize();
         int rotation = size >= 9 ? 0 : -8;
         return $"rotate({rotation},{x},{y})";
     }
 
-    private void MouseOver(StackedBarItem p, int index)
+    private void MouseOver(int serieIndex, int columnIndex)
     {
-        if (p.TooltipProperties.Any())
+        if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Any())
         {
-            Console.WriteLine(index < Data.Titles.Count / 2 + 1);
-            double x = GetXCoordinate(index) + (index < Data.Titles.Count / 2+1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
-            double y = GetYCoordinate(p.Value);
+            double x = GetXCoordinate(columnIndex) + (columnIndex < Data.Titles.Count / 2+1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            double sum = 0;
+            for (int i = 0; i < serieIndex; i++)
+            {
+                sum += Data.Series[i].Values[columnIndex].Value;
+            }
+            sum += Data.Series[serieIndex].Values[columnIndex].Value / 2;
+            double y = GetYCoordinate(sum);
+            Console.WriteLine($"{sum} {y}");
             tooltipX = $"{x}px";
             tooltipY = $"{y}px";
             tooltipXTranslate = x < Width / 2 ? "0" : "-100%";
             tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
-            tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+            tooltipProperties = Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
             showTooltip = true;
         }
     }
