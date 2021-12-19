@@ -19,7 +19,7 @@ namespace BlazorCharts
         private double MarginLeft = 30;
         private const double MarginRight = 10;
         private const double MarginTop = 30;
-        private const double MarginBottom = 20;
+        private const double MarginBottom = 50;
 
         private bool showTooltip;
         private string? tooltipX;
