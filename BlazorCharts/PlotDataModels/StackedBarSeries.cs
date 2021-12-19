@@ -2,7 +2,7 @@
 
 public class StackedBarSeries
 {
-    public StackedBarSeries(IList<string> titles, params StackedBarSerie[] series)
+    public StackedBarSeries(IList<string> titles, bool showLabels = true, params StackedBarSerie[] series)
     {
         if (titles.Count>10)
         {
@@ -16,10 +16,11 @@ public class StackedBarSeries
             }
         }
         Titles = titles;
+        ShowLabels = showLabels;
         Series = series;
     }
 
-    public IList<string> Titles { get; set; }
+    public IList<string> Titles { get; }
     public IList<StackedBarSerie> Series { get; }
-    public bool ShowLabels { get; set; }
+    public bool ShowLabels { get; }
 }

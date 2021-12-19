@@ -6,7 +6,7 @@ namespace BlazorCharts
 {
     public partial class ScatterChart
     {
-        [EditorRequired] [Parameter] public IList<ScatterPoint> Data { get; set; } = default!;
+        [EditorRequired] [Parameter] public ScatterSeries Data { get; set; } = default!;
         [Parameter] public double Width { get; set; } = 700;
         [Parameter] public double Height { get; set; } = 350;
         [Parameter] public string Title { get; set; } = "Scatter Chart";
@@ -35,9 +35,9 @@ namespace BlazorCharts
 
         private void SetLimits()
         {
-            (XMin, XMax) = GetLimits(Data.Select(x => x.X));
-            (YMin, YMax) = GetLimits(Data.Select(x => x.Y));
-            SetMarginLeft(Data.Select(x => x.Y));
+            (XMin, XMax) = GetLimits(Data.Series.SelectMany(x=>x.Points).Select(x => x.X));
+            (YMin, YMax) = GetLimits(Data.Series.SelectMany(x => x.Points).Select(x => x.Y));
+            SetMarginLeft(Data.Series.SelectMany(x => x.Points).Select(x => x.Y));
         }
 
         private void SetMarginLeft(IEnumerable<double> values)
@@ -77,14 +77,17 @@ namespace BlazorCharts
 
         private void MouseOver(ScatterPoint p)
         {
-            double x = GetXCoordinate(p.X);
-            double y = GetYCoordinate(p.Y);
-            tooltipX = $"{x}px";
-            tooltipY = $"{y}px";
-            tooltipXTranslate = x < Width/ 2 ? "0" : "-100%";
-            tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
-            tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
-            showTooltip = true;
+            if (p.TooltipProperties.Any())
+            {
+                double x = GetXCoordinate(p.X);
+                double y = GetYCoordinate(p.Y);
+                tooltipX = $"{x}px";
+                tooltipY = $"{y}px";
+                tooltipXTranslate = x < Width / 2 ? "0" : "-100%";
+                tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
+                tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+                showTooltip = true;
+            }
         }
 
         private void MouseLeave()

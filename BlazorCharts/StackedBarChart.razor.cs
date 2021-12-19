@@ -13,16 +13,16 @@ public partial class StackedBarChart
 
     private double YMax;
 
-    private bool showTooltip;
-    private double tooltipX;
-    private double tooltipY;
-    private double tooltipHeight;
-    private double tooltipWidth;
     private double MarginLeft = 30;
     private double MarginRight = 30;
     private const double MarginTop = 30;
     private const double MarginBottom = 50;
-    //private IEnumerable<(string text, int index)>? tooltipProperties;
+
+    private bool showTooltip;
+    private string? tooltipX;
+    private string? tooltipY;
+    private string? tooltipXTranslate;
+    private string? tooltipYTranslate;
     private IEnumerable<string>? tooltipProperties;
 
     protected override void OnParametersSet()
@@ -147,26 +147,16 @@ public partial class StackedBarChart
     {
         if (p.TooltipProperties.Any())
         {
-            tooltipWidth = GetTooltipWidth(p);
-            tooltipHeight = GetTooltipHeight(p);
-            double x = GetXCoordinate(index) + (index < Data.Titles.Count / 2 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            Console.WriteLine(index < Data.Titles.Count / 2 + 1);
+            double x = GetXCoordinate(index) + (index < Data.Titles.Count / 2+1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
             double y = GetYCoordinate(p.Value);
-            tooltipX = index < Data.Titles.Count / 2 ? x : x - tooltipWidth;
-            tooltipY = Height * 0.6; /*p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;*/
-            //tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
+            tooltipX = $"{x}px";
+            tooltipY = $"{y}px";
+            tooltipXTranslate = x < Width / 2 ? "0" : "-100%";
+            tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
             tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
             showTooltip = true;
         }
-    }
-
-    private static double GetTooltipHeight(StackedBarItem p)
-    {
-        return p.TooltipProperties.Count * 18 + 5;
-    }
-
-    private static double GetTooltipWidth(StackedBarItem p)
-    {
-        return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.5;
     }
 
     private void MouseLeave()

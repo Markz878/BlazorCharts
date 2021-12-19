@@ -31,7 +31,7 @@
             {
                 int serieIndex = j;
                 sum += Data.Series[serieIndex].Values[columnIndex].Value;
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-bar bar-animation" @onmouseover="()=>MouseOver(Data.Series[serieIndex].Values[columnIndex], serieIndex)" @onmouseout="MouseLeave" />
+                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-item bar-animate" @onmouseover="()=>MouseOver(Data.Series[serieIndex].Values[columnIndex], columnIndex)" @onmouseout="MouseLeave" />
             }
         }
         @if (Data.ShowLabels)
@@ -45,7 +45,7 @@
                     int serieIndex = j;
                     sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animation">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G3")</text>
+                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G3")</text>
                     </text>
                 }
             }
@@ -57,8 +57,8 @@
                 @for (int i = 0; i < Data.Series.Count; i++)
                 {
                     int index = i;
-                    <div class="marker-box" style="background: @Data.Series[index].Color"></div>
-                    <div class="marker-text">@Data.Series[index].Title</div>
+                    <div class="legend-colorbox" style="background: @Data.Series[index].Color"></div>
+                    <div class="legend-text">@Data.Series[index].Title</div>
                 }
             </div>
         </foreignObject>
@@ -66,13 +66,14 @@
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" class="tooltip" />
-            @foreach (string text in tooltipProperties)
-            {
-                <text>
-                    @*<text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>*@
-                </text>
-            }
+            <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
+                <div class="tooltip-container" style="transform: translate(@tooltipX, @tooltipY) translate(@tooltipXTranslate, @tooltipYTranslate)">
+                    @foreach(string tt in tooltipProperties)
+                    {
+                        <p class="tooltip-text">@tt</p>
+                    }
+                </div>
+            </foreignObject>
         </g>
     }
 </svg>

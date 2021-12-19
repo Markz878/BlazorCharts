@@ -23,9 +23,12 @@
         }
     </g>
     <g>
-        @foreach(ScatterPoint p in Data)
+        @foreach(ScatterSerie s in Data.Series)
         {
-            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
+            @foreach(ScatterPoint p in s.Points)
+            {
+                <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="@s.Color" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
+            }
         }
     </g>
     @if (showTooltip && tooltipProperties is not null)

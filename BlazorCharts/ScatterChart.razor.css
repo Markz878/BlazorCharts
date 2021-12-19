@@ -1,19 +1,12 @@
 ﻿.datapoint {
-    animation: kaboom 0.8s ease-out;
-    fill: red;
-    transition: ease-in-out 0.2s;
+    animation: scatter-animate 0.8s ease-out;
+    transition: ease-in-out 0.1s;
 }
 
     .datapoint:hover {
-        fill: darkred;
-        transition: ease-in-out 0.2s;
+        filter: brightness(50%);
+        transition: ease-in-out 0.1s;
     }
-
-.scatter-tooltip {
-    fill: rgb(240, 240, 240);
-    stroke-width: 1;
-    stroke: rgba(0,0,0,0.9);
-}
 
 .tooltip-container {
     display: inline-block;
@@ -24,15 +17,16 @@
 }
 
 .tooltip-text {
+    font-size: 10px;
     margin: 0 4px;
 }
 
-@keyframes kaboom {
+@keyframes scatter-animate {
     0% {
-        transform: translateY(90%);
+        transform: scaleY(10%) translateY(100%);
     }
 
     100% {
-        transform: translateY(0);
+        transform: scaleY(100%) translateY(0);
     }
 }

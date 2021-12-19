@@ -10,7 +10,7 @@ public class StackedBarSerie
         Values = values;
     }
 
-    public string Title { get;}
+    public string Title { get; }
     public string Color { get; }
     public string TextColor { get; }
     public IList<StackedBarItem> Values { get; }

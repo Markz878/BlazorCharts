@@ -1,14 +1,29 @@
-﻿.tooltip {
-    fill: rgb(240, 240, 240);
-    stroke-width: 1;
-    stroke: rgba(0,0,0,0.9);
-    pointer-events: none;
+﻿.tooltip-container {
+    display: inline-block;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2px 5px;
+}
+
+.tooltip-text {
+    font-size: 10px;
+    margin: 0 4px;
 }
 
 .data-label {
     pointer-events: none;
     text-anchor: middle;
 }
+
+.data-item {
+    transition: ease-in-out 0.2s;
+}
+
+    .data-item:hover {
+        filter: brightness(50%);
+        transition: ease-in-out 0.1s;
+    }
 
 .legend-container {
     display: flex;
@@ -17,14 +32,28 @@
     font-size: 10px;
 }
 
-.marker-box {
+.legend-colorbox {
     width: 10px;
     height: 10px;
     border: 1px solid black;
     margin-top: 2px;
 }
 
-.marker-text {
+.legend-text {
     margin-left: 2px;
     margin-right: 1rem;
+}
+
+.bar-animate {
+    animation: bar-transform 0.8s ease-out;
+}
+
+@keyframes bar-transform {
+    0% {
+        transform: scaleY(10%) translateY(100%);
+    }
+
+    100% {
+        transform: scaleY(100%) translateY(0);
+    }
 }
