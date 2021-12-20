@@ -1,16 +1,19 @@
-﻿.datapoint {
+﻿.dataline {
     animation: scatter-animate 0.8s ease-out;
     transition: ease-in-out 0.1s;
+    stroke-width: 2;
+    fill: none;
 }
 
-    .datapoint:hover {
-        filter: brightness(50%);
+    .dataline:hover {
+        filter: brightness(75%);
+        stroke-width: 3;
         transition: ease-in-out 0.1s;
     }
 
 @keyframes scatter-animate {
     0% {
-        transform: scaleY(10%) translateY(100%);
+        transform: scaleY(10%) translateY(70%);
     }
 
     100% {

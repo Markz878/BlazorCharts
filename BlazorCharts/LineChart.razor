@@ -7,7 +7,7 @@
         }
     </g>
     <g>
-        @foreach(double value in YAxis)
+        @foreach (double value in YAxis)
         {
             <text>
                 <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
@@ -15,30 +15,42 @@
         }
     </g>
     <g>
-        @foreach(double value in XAxis)
+        @foreach (double value in XAxis)
         {
             <text>
-                <text x="@GetXCoordinate(value)" y="@Height" font-size="12px" text-anchor="middle">@value</text>
+                <text x="@GetXCoordinate(value)" y="@(Height-30)" font-size="12px" text-anchor="middle">@value</text>
             </text>
         }
     </g>
     <g>
-        @foreach(ScatterPoint p in Data)
+        @foreach (LineSerie s in Data.Series)
         {
-            <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="red" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
+            <polyline points="@GetPolylinePoints(s)" class="dataline" style="stroke: @s.Color;"/>
         }
     </g>
-    @if (showTooltip && tooltipProperties is not null)
-    {
+    <g>
+        <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
+            <div class="legend-container">
+                @for (int i = 0; i < Data.Series.Count; i++)
+                {
+                    int index = i;
+                    <div class="legend-colorbox" style="background: @Data.Series[index].Color"></div>
+                    <div class="legend-text">@Data.Series[index].Title</div>
+                }
+            </div>
+        </foreignObject>
+    </g>
+    @*    @if (showTooltip && tooltipProperties is not null)
+        {
         <g>
-            <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
-            @foreach((string text, int index) in tooltipProperties)
-            {
-                <text>
-                    <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
-                </text>
-            }
+        <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
+        @foreach((string text, int index) in tooltipProperties)
+        {
+        <text>
+        <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
+        </text>
+        }
         </g>
-    }
+        }*@
 </svg>
 

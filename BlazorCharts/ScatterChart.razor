@@ -7,7 +7,7 @@
         }
     </g>
     <g>
-        @foreach(double value in YAxis)
+        @foreach (double value in YAxis)
         {
             <text>
                 <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
@@ -15,7 +15,7 @@
         }
     </g>
     <g>
-        @foreach(double value in XAxis)
+        @foreach (double value in XAxis)
         {
             <text>
                 <text x="@GetXCoordinate(value)" y="@(Height-30)" font-size="12px" text-anchor="middle">@value</text>
@@ -23,11 +23,11 @@
         }
     </g>
     <g>
-        @foreach(ScatterSerie s in Data.Series)
+        @foreach (ScatterSerie s in Data.Series)
         {
-            @foreach(ScatterPoint p in s.Points)
+            @foreach (ScatterPoint p in s.Points)
             {
-                <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="@s.Color" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()"/>
+                <circle class="datapoint" cx="@GetXCoordinate(p.X)" cy="@GetYCoordinate(p.Y)" r="4" stroke="black" stroke-width="1" fill="@s.Color" @onmouseover="()=>MouseOver(p)" @onmouseout="()=>MouseLeave()" />
             }
         }
     </g>
@@ -48,7 +48,7 @@
         <g>
             <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
                 <div class="tooltip-container" style="transform: translate(@tooltipX, @tooltipY) translate(@tooltipXTranslate, @tooltipYTranslate)">
-                    @foreach(string tt in tooltipProperties)
+                    @foreach (string tt in tooltipProperties)
                     {
                         <p class="tooltip-text">@tt</p>
                     }

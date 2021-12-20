@@ -7,26 +7,27 @@ namespace BlazorCharts
 {
     public partial class LineChart
     {
-        [EditorRequired] [Parameter] public IList<ScatterPoint> Data { get; set; } = default!;
+        [EditorRequired] [Parameter] public LineSeries Data { get; set; } = default!;
         [Parameter] public double Width { get; set; } = 700;
         [Parameter] public double Height { get; set; } = 350;
-        [Parameter] public string Title { get; set; } = "Scatter Chart";
+        [Parameter] public string Title { get; set; } = "Line Chart";
 
         private double XMin;
         private double XMax;
         private double YMin;
         private double YMax;
 
-        private bool showTooltip;
-        private double tooltipX;
-        private double tooltipY;
-        private double tooltipHeight;
-        private double tooltipWidth;
         private double MarginLeft = 30;
         private const double MarginRight = 10;
         private const double MarginTop = 30;
-        private const double MarginBottom = 20;
-        private IEnumerable<(string text, int index)>? tooltipProperties;
+        private const double MarginBottom = 50;
+
+        //private bool showTooltip;
+        //private double tooltipX;
+        //private double tooltipY;
+        //private double tooltipHeight;
+        //private double tooltipWidth;
+        //private IEnumerable<(string text, int index)>? tooltipProperties;
 
         protected override void OnParametersSet()
         {
@@ -35,9 +36,9 @@ namespace BlazorCharts
 
         private void SetLimits()
         {
-            (XMin, XMax) = GetLimits(Data.Select(x => x.X));
-            (YMin, YMax) = GetLimits(Data.Select(x => x.Y));
-            SetMarginLeft(Data.Select(x => x.Y));
+            (XMin, XMax) = GetLimits(Data.Series.SelectMany(x => x.Points).Select(x=>x.X));
+            (YMin, YMax) = GetLimits(Data.Series.SelectMany(x => x.Points).Select(x => x.Y));
+            SetMarginLeft(Data.Series.SelectMany(x => x.Points).Select(x => x.Y));
         }
 
         private void SetMarginLeft(IEnumerable<double> values)
@@ -49,7 +50,7 @@ namespace BlazorCharts
             MarginLeft = order * 10 + 10;
         }
 
-        private (double min, double max) GetLimits(IEnumerable<double> values)
+        private static (double min, double max) GetLimits(IEnumerable<double> values)
         {
             double minVal = values.Min();
             double maxVal = values.Max();
@@ -75,33 +76,26 @@ namespace BlazorCharts
             return result;
         }
 
-        private void MouseOver(ScatterPoint p)
+        private string GetPolylinePoints(LineSerie serie)
         {
-            tooltipWidth = GetTooltipWidth(p);
-            tooltipHeight = GetTooltipHeight(p);
-            double x = GetXCoordinate(p.X);
-            double y = GetYCoordinate(p.Y);
-            tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
-            tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
-            tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
-            showTooltip = true;
+            return string.Join(" ", serie.Points.Select(x=>$"{GetXCoordinate(x.X)},{GetYCoordinate(x.Y)}"));
         }
 
-        private double GetTooltipHeight(ScatterPoint p)
-        {
-            return p.TooltipProperties.Count * 18 + 5;
-        }
+        //private void MouseOver(ScatterPoint p)
+        //{
+        //    tooltipWidth = GetTooltipWidth(p);
+        //    tooltipHeight = GetTooltipHeight(p);
+        //    double x = GetXCoordinate(p.X);
+        //    double y = GetYCoordinate(p.Y);
+        //    tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
+        //    tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
+        //    tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
+        //    showTooltip = true;
+        //}
 
-        private double GetTooltipWidth(ScatterPoint p)
-        {
-            KeyValuePair<string, string> maxLenProperty = p.TooltipProperties.MaxBy(x => x.Key.Length + x.Value.Length);
-            Console.WriteLine($"Value {maxLenProperty.Key}:{maxLenProperty.Value} has length {maxLenProperty.Key.Length + maxLenProperty.Value.Length}");
-            return p.TooltipProperties.Max(x => x.Key.Length + x.Value.Length) * 5.65;
-        }
-
-        private void MouseLeave()
-        {
-            showTooltip = false;
-        }
+        //private void MouseLeave()
+        //{
+        //    showTooltip = false;
+        //}
     }
 }
