@@ -48,7 +48,7 @@
                     int serieIndex = j;
                     sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G3")</text>
+                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
                     </text>
                 }
             }
@@ -71,7 +71,7 @@
         <g>
             <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
                 <div class="tooltip-container" style="transform: translate(@tooltipX, @tooltipY) translate(@tooltipXTranslate, @tooltipYTranslate)">
-                    @foreach(string tt in tooltipProperties)
+                    @foreach (string tt in tooltipProperties)
                     {
                         <p class="tooltip-text">@tt</p>
                     }
