@@ -10,7 +10,8 @@ public partial class StackedBarChart
     [EditorRequired] [Parameter] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
-    [Parameter] public string Title { get; set; } = "Stacked Bar Chart";
+    [Parameter] [EditorRequired] public string Title { get; set; } = "";
+    [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
 
     private double YMax;
 
@@ -60,7 +61,7 @@ public partial class StackedBarChart
     private void SetMarginLeft(double ymax)
     {
         double order = Round(Log10(ymax));
-        MarginLeft = order * 10 + 10;
+        MarginLeft = order * 10 + 30;
     }
 
     private static double GetLimit(IEnumerable<double> values)
@@ -75,6 +76,10 @@ public partial class StackedBarChart
 
     private double GetXCoordinate(int order)
     {
+        if (Data.Titles.Count == 1)
+        {
+            return Width / 2;
+        }
         double barWidth = GetBarWidth();
         double result = MarginLeft + barWidth + (double)order / (Data.Titles.Count - 1) * (Width - MarginLeft - MarginRight - 2 * barWidth);
         return result;
@@ -99,6 +104,10 @@ public partial class StackedBarChart
 
     private double GetXOffsetBetweenColumns()
     {
+        if (Data.Titles.Count == 1)
+        {
+            return Width / 2;
+        }
         double barWidth = GetBarWidth();
         double result = 1d / (Data.Titles.Count - 1) * (Width - MarginLeft - MarginRight - 2 * barWidth);
         return result;
@@ -148,7 +157,7 @@ public partial class StackedBarChart
     {
         if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Any())
         {
-            double x = GetXCoordinate(columnIndex) + (columnIndex < Data.Titles.Count / 2+1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            double x = GetXCoordinate(columnIndex) + (columnIndex < Data.Titles.Count / 2 + 1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
             double sum = 0;
             for (int i = 0; i < serieIndex; i++)
             {

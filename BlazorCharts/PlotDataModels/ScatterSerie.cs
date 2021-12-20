@@ -7,9 +7,9 @@ public class ScatterSerie
         ArgumentNullException.ThrowIfNull(title);
         ArgumentNullException.ThrowIfNull(color);
         ArgumentNullException.ThrowIfNull(points);
-        if (points.Count == 0)
+        if (points.Count < 2)
         {
-            throw new ArgumentException("No point given for scatter serie.", nameof(points));
+            throw new ArgumentException("Scatter series must have at least 2 points.", nameof(points));
         }
         Title = title;
         Color = color;

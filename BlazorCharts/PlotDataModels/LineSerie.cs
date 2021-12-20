@@ -9,9 +9,9 @@ public class LineSerie
         ArgumentNullException.ThrowIfNull(title);
         ArgumentNullException.ThrowIfNull(color);
         ArgumentNullException.ThrowIfNull(points);
-        if (points.Count == 0)
+        if (points.Count < 2)
         {
-            throw new ArgumentException("No points given for line series.", nameof(points));
+            throw new ArgumentException("Line series must have at least 2 points.", nameof(points));
         }
         if (!GuardUtilities.IsStrictlyAscending(points.Select(x => x.X)))
         {

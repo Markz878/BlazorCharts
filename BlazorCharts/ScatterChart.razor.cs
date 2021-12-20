@@ -10,17 +10,19 @@ namespace BlazorCharts
         [EditorRequired] [Parameter] public ScatterSeries Data { get; set; } = default!;
         [Parameter] public double Width { get; set; } = 700;
         [Parameter] public double Height { get; set; } = 350;
-        [Parameter] public string Title { get; set; } = "Scatter Chart";
+        [Parameter] [EditorRequired] public string Title { get; set; } = "";
+        [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
+        [Parameter] [EditorRequired] public string XAxisTitle { get; set; } = "";
 
         private double XMin;
         private double XMax;
         private double YMin;
         private double YMax;
 
-        private double MarginLeft = 30;
+        private double MarginLeft;
         private const double MarginRight = 10;
         private const double MarginTop = 30;
-        private const double MarginBottom = 50;
+        private const double MarginBottom = 70;
 
         private bool showTooltip;
         private string? tooltipX;
@@ -47,7 +49,7 @@ namespace BlazorCharts
             double maxVal = values.Max();
             double diff = maxVal - minVal;
             double order = Round(Log10(diff));
-            MarginLeft = order * 10 + 10;
+            MarginLeft = order * 10 + 30;
         }
 
         private static (double min, double max) GetLimits(IEnumerable<double> values)

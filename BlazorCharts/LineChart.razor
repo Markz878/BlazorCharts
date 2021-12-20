@@ -14,13 +14,19 @@
             </text>
         }
     </g>
+    <g transform="rotate(270, 10, @(Height/2))">
+        <text x="10" y="@(Height/2)" font-size="12px" text-anchor="middle" dominant-baseline="middle">@YAxisTitle</text>
+    </g>
     <g>
         @foreach (double value in XAxis)
         {
             <text>
-                <text x="@GetXCoordinate(value)" y="@(Height-30)" font-size="12px" text-anchor="middle">@value</text>
+                <text x="@GetXCoordinate(value)" y="@(Height-50)" font-size="12px" text-anchor="middle">@value</text>
             </text>
         }
+    </g>
+    <g>
+        <text x="@(Width/2)" y="@(Height-35)" font-size="12px" text-anchor="middle" dominant-baseline="middle">@XAxisTitle</text>
     </g>
     <g>
         @foreach (LineSerie s in Data.Series)
@@ -40,17 +46,5 @@
             </div>
         </foreignObject>
     </g>
-    @*    @if (showTooltip && tooltipProperties is not null)
-        {
-        <g>
-        <rect x="@tooltipX" y="@tooltipY" width="@tooltipWidth" height="@tooltipHeight" rx="15" class="scatter-tooltip"/>
-        @foreach((string text, int index) in tooltipProperties)
-        {
-        <text>
-        <text x="@(tooltipX+10)" y="@(tooltipY+20+index*15)" class="tooltip-text">@text</text>
-        </text>
-        }
-        </g>
-        }*@
 </svg>
 
