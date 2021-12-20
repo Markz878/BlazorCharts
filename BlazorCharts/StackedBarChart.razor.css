@@ -1,4 +1,21 @@
-﻿.data-label {
+﻿.chart {
+    margin-bottom: 2rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@font-face {
+    font-family: Inconsolata;
+    src: url(Inconsolata-Regular.ttf);
+}
+
+.monospaced {
+    font-family: Inconsolata;
+}
+
+.data-label {
     pointer-events: none;
     text-anchor: middle;
 }
@@ -24,4 +41,37 @@
     100% {
         transform: scaleY(100%) translateY(0);
     }
+}
+
+.tooltip-container {
+    display: inline-block;
+    background-color: rgb(240, 240, 240);
+    border: 1px solid black;
+    border-radius: 15px;
+    padding: 2px 5px;
+}
+
+.tooltip-text {
+    font-size: 10px;
+    margin: 0 4px;
+}
+
+.legend-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 10px;
+}
+
+.legend-colorbox {
+    width: 10px;
+    height: 10px;
+    border: 1px solid black;
+    margin-top: 2px;
+}
+
+.legend-text {
+    margin-left: 2px;
+    margin-right: 1rem;
+    user-select: all;
 }

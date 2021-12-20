@@ -165,11 +165,10 @@ public partial class StackedBarChart
             }
             sum += Data.Series[serieIndex].Values[columnIndex].Value / 2;
             double y = GetYCoordinate(sum);
-            Console.WriteLine($"{sum} {y}");
             tooltipX = $"{x}px";
             tooltipY = $"{y}px";
-            tooltipXTranslate = x < Width / 2 ? "0" : "-100%";
-            tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
+            tooltipXTranslate = x <= Width / 2 + GetBarWidth() ? "0" : "-100%";
+            tooltipYTranslate = y <= Height / 2 ? "0" : "-100%";
             tooltipProperties = Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
             showTooltip = true;
         }
