@@ -4,9 +4,14 @@ public class StackedBarSeries
 {
     public StackedBarSeries(IList<string> titles, bool showLabels = true, params StackedBarSerie[] series)
     {
+        ArgumentNullException.ThrowIfNull(titles);
         if (titles.Count>10)
         {
-            throw new ArgumentException("Stacked bar chart is not suitable for more than 10 data sets.");
+            throw new ArgumentException("Stacked bar chart is not suitable for more than 10 data serie.");
+        }
+        if (series.Length == 0)
+        {
+            throw new ArgumentException(nameof(series), "Stacked bar chart is not suitable for more than 10 data serie.");
         }
         foreach (StackedBarSerie? serie in series)
         {

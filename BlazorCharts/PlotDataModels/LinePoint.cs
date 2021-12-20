@@ -10,5 +10,4 @@ public class LinePoint
 
     public double X { get; }
     public double Y { get; }
-    public Dictionary<string, string> TooltipProperties { get; set; } = new Dictionary<string, string>();
 }

@@ -1,4 +1,5 @@
 using BlazorCharts.PlotDataModels;
+using BlazorCharts.Utilities;
 using Microsoft.AspNetCore.Components;
 using static System.Math;
 

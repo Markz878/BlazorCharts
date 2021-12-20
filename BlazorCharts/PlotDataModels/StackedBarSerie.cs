@@ -4,6 +4,10 @@ public class StackedBarSerie
 {
     public StackedBarSerie(string title, string color, IList<StackedBarItem> values, string textColor = "black")
     {
+        ArgumentNullException.ThrowIfNull(title);
+        ArgumentNullException.ThrowIfNull(color);
+        ArgumentNullException.ThrowIfNull(values);
+        ArgumentNullException.ThrowIfNull(textColor);
         Title = title;
         Color = color;
         TextColor = textColor;

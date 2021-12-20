@@ -4,8 +4,9 @@ public class ScatterSeries
 {
     public IList<ScatterSerie> Series { get; }
 
-    public ScatterSeries(IList<ScatterSerie> series)
+    public ScatterSeries(params ScatterSerie[] series)
     {
+        ArgumentNullException.ThrowIfNull(series);
         Series = series;
     }
 }

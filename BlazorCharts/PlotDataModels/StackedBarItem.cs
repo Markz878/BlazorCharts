@@ -6,6 +6,10 @@ public class StackedBarItem
 
     public StackedBarItem(double value)
     {
+        if (value < 0)
+        {
+            throw new ArgumentOutOfRangeException(nameof(value), "Stacked bar item can't have a negative value.");
+        }
         Value = value;
     }
 
