@@ -5,6 +5,7 @@
 
     .datapoint:hover {
         filter: brightness(50%);
+        r: 5;
         transition: ease-in-out 0.1s;
     }
 

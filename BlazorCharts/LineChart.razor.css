@@ -1,5 +1,5 @@
 ﻿.dataline {
-    animation: scatter-animate 0.8s ease-out;
+    animation: line-animate 0.8s ease-out;
     transition: ease-in-out 0.1s;
     stroke-width: 2;
     fill: none;
@@ -11,9 +11,9 @@
         transition: ease-in-out 0.1s;
     }
 
-@keyframes scatter-animate {
+@keyframes line-animate {
     0% {
-        transform: scaleY(10%) translateY(70%);
+        transform: scaleY(10%) translateY(80%);
     }
 
     100% {

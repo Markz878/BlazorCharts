@@ -7,7 +7,7 @@ namespace BlazorCharts;
 
 public partial class StackedBarChart
 {
-    [EditorRequired] [Parameter] public StackedBarSeries Data { get; set; } = default!;
+    [Parameter] [EditorRequired] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
     [Parameter] [EditorRequired] public string Title { get; set; } = "";

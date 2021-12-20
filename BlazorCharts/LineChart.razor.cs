@@ -3,7 +3,6 @@ using BlazorCharts.Utilities;
 using Microsoft.AspNetCore.Components;
 using static System.Math;
 
-
 namespace BlazorCharts
 {
     public partial class LineChart
@@ -24,13 +23,6 @@ namespace BlazorCharts
         private const double MarginRight = 10;
         private const double MarginTop = 30;
         private const double MarginBottom = 70;
-
-        //private bool showTooltip;
-        //private double tooltipX;
-        //private double tooltipY;
-        //private double tooltipHeight;
-        //private double tooltipWidth;
-        //private IEnumerable<(string text, int index)>? tooltipProperties;
 
         protected override void OnParametersSet()
         {
@@ -83,22 +75,5 @@ namespace BlazorCharts
         {
             return string.Join(" ", serie.Points.Select(x=>$"{GetXCoordinate(x.X)},{GetYCoordinate(x.Y)}"));
         }
-
-        //private void MouseOver(ScatterPoint p)
-        //{
-        //    tooltipWidth = GetTooltipWidth(p);
-        //    tooltipHeight = GetTooltipHeight(p);
-        //    double x = GetXCoordinate(p.X);
-        //    double y = GetYCoordinate(p.Y);
-        //    tooltipX = p.X < (XMin + XMax) / 2 ? x : x - tooltipWidth;
-        //    tooltipY = p.Y > (YMin + YMax) / 2 ? y : y - tooltipHeight;
-        //    tooltipProperties = p.TooltipProperties.Select((x, i) => ($"{x.Key}: {x.Value}", i));
-        //    showTooltip = true;
-        //}
-
-        //private void MouseLeave()
-        //{
-        //    showTooltip = false;
-        //}
     }
 }
