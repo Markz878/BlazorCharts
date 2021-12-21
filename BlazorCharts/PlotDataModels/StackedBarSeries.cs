@@ -2,16 +2,20 @@
 
 public class StackedBarSeries
 {
-    public StackedBarSeries(IList<string> titles, bool showLabels = true, params StackedBarSerie[] series)
+    public StackedBarSeries(IList<string> titles, bool showLabels, params StackedBarSerie[] series)
     {
         ArgumentNullException.ThrowIfNull(titles);
-        if (titles.Count>10)
+        if (titles.Count > 10)
         {
-            throw new ArgumentException("Stacked bar chart is not suitable for more than 10 data serie.");
+            throw new ArgumentException("Stacked bar chart is not suitable for more than 10 data series.", nameof(titles));
+        }
+        if (titles.Any(x=>string.IsNullOrEmpty(x)))
+        {
+            throw new ArgumentException("One of the given titles was null or an empty string.", nameof(titles));
         }
         if (series.Length == 0)
         {
-            throw new ArgumentException(nameof(series), "Stacked bar chart is not suitable for more than 10 data serie.");
+            throw new ArgumentException("Stacked bar chart is not suitable for more than 10 data series.", nameof(series));
         }
         foreach (StackedBarSerie? serie in series)
         {

@@ -80,7 +80,7 @@ namespace BlazorCharts
 
         private void MouseOver(ScatterPoint p)
         {
-            if (p.TooltipProperties.Any())
+            if (p.TooltipProperties is not null)
             {
                 double x = GetXCoordinate(p.X);
                 double y = GetYCoordinate(p.Y);

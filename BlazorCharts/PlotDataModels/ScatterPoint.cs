@@ -2,13 +2,14 @@
 
 public class ScatterPoint
 {
-    public ScatterPoint(double x, double y)
+    public ScatterPoint(double x, double y, Dictionary<string, string>? tooltips = null)
     {
         X = x;
         Y = y;
+        TooltipProperties = tooltips;
     }
 
     public double X { get; }
     public double Y { get; }
-    public Dictionary<string, string> TooltipProperties { get; set; } = new Dictionary<string, string>();
+    public Dictionary<string, string>? TooltipProperties { get; }
 }

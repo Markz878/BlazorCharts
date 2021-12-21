@@ -155,7 +155,7 @@ public partial class StackedBarChart
 
     private void MouseOver(int serieIndex, int columnIndex)
     {
-        if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Any())
+        if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties is not null)
         {
             double x = GetXCoordinate(columnIndex) + (columnIndex < Data.Titles.Count / 2 + 1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
             double sum = 0;
@@ -169,7 +169,7 @@ public partial class StackedBarChart
             tooltipY = $"{y}px";
             tooltipXTranslate = x <= Width / 2 + GetBarWidth() ? "0" : "-100%";
             tooltipYTranslate = y <= Height / 2 ? "0" : "-100%";
-            tooltipProperties = Data.Series[serieIndex].Values[columnIndex].TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+            tooltipProperties = Data.Series[serieIndex].Values[columnIndex].TooltipProperties?.Select(x => $"{x.Key}: {x.Value}");
             showTooltip = true;
         }
     }

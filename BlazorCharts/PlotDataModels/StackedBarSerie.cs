@@ -2,7 +2,7 @@
 
 public class StackedBarSerie
 {
-    public StackedBarSerie(string title, string color, IList<StackedBarItem> values, string textColor = "black")
+    public StackedBarSerie(string title, string color, string textColor, IList<StackedBarItem> values)
     {
         ArgumentNullException.ThrowIfNull(title);
         ArgumentNullException.ThrowIfNull(color);
