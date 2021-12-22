@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorCharts.Client", "Blaz
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A11680D-856E-4374-B59D-76785550C20D}"
 	ProjectSection(SolutionItems) = preProject
+		linechart.png = linechart.png
 		README.md = README.md
+		scatterchart.png = scatterchart.png
+		stackedbarchart.png = stackedbarchart.png
 	EndProjectSection
 EndProject
 Global

@@ -14,13 +14,13 @@ You can find examples in the BlazorCharts.Client project.
 ## Examples
 Scatter chart:
 
-<img src="scatterchart.png" alt="scatter chart" width="600"/>
+<img src="screenshots/scatterchart.png" alt="scatter chart" width="600"/>
 
 Line chart:
 
-<img src="linechart.png" alt="line chart" width="600"/>
+<img src="screenshots/linechart.png" alt="line chart" width="600"/>
 
 Stacked bar chart:
 
-<img src="stackedbarchart.png" alt="line chart" width="600"/>
+<img src="screenshots/stackedbarchart.png" alt="line chart" width="600"/>
 
