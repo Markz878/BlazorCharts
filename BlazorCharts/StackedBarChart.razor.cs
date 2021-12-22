@@ -14,7 +14,6 @@ public class StackedBarChartBase : BaseChart
 
     protected override void OnParametersSet()
     {
-        MarginBottom = 50;
         SetLimits();
     }
 
@@ -23,6 +22,7 @@ public class StackedBarChartBase : BaseChart
         YMax = GetLimit(getElementWiseSum(Data));
         SetMarginLeft(YMax);
         SetMarginRight();
+        SetMarginBottom();
 
         static IEnumerable<double> getElementWiseSum(StackedBarSeries Data)
         {
@@ -36,6 +36,11 @@ public class StackedBarChartBase : BaseChart
                 yield return sum;
             }
         }
+    }
+
+    private void SetMarginBottom()
+    {
+        MarginBottom = ShowLegend ? 50 : 30;
     }
 
     protected void SetMarginRight()

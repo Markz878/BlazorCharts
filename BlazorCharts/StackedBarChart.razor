@@ -56,18 +56,21 @@
             }
         }
     </g>
-    <g>
-        <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
-            <div class="legend-container">
-                @for (int i = 0; i < Data.Series.Count; i++)
-                {
-                    int index = i;
-                    <div class="legend-colorbox" style="background: @Data.Series[index].Color"></div>
-                    <div class="legend-text">@Data.Series[index].Title</div>
-                }
-            </div>
-        </foreignObject>
-    </g>
+    @if (ShowLegend)
+    {
+        <g>
+            <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
+                <div class="legend-container">
+                    @for (int i = 0; i < Data.Series.Count; i++)
+                    {
+                        int index = i;
+                        <div class="legend-colorbox" style="background: @Data.Series[index].Color"></div>
+                        <div class="legend-text">@Data.Series[index].Title</div>
+                    }
+                </div>
+            </foreignObject>
+        </g>
+    }
     @if (showTooltip && tooltipProperties is not null)
     {
         <g>

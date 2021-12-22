@@ -8,8 +8,6 @@ public abstract class XYBaseChart : BaseChart
 {
     [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
     [Parameter] [EditorRequired] public string XAxisTitle { get; set; } = "";
-    [Parameter] public bool ShowLegend { get; set; } = true;
-
 
     protected double XMin;
     protected double XMax;
@@ -42,7 +40,7 @@ public abstract class XYBaseChart : BaseChart
         MarginBottom = ShowLegend ? 70 : 35;
     }
 
-    protected void SetMarginLeft(IEnumerable<double> xValues)
+    private void SetMarginLeft(IEnumerable<double> xValues)
     {
         double minVal = xValues.Min();
         double maxVal = xValues.Max();
@@ -51,7 +49,7 @@ public abstract class XYBaseChart : BaseChart
         MarginLeft = Max(order, 2) * 10 + 30;
     }
 
-    protected static (double min, double max) GetLimits(IEnumerable<double> values)
+    private static (double min, double max) GetLimits(IEnumerable<double> values)
     {
         double minVal = values.Min();
         double maxVal = values.Max();

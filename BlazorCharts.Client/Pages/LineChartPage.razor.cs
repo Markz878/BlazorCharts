@@ -9,9 +9,9 @@ public partial class LineChartPage
     {
         data = new LineSeries(
                 new LineSerie("Red series", "rgba(255,0,0,0.75)",
-                    Enumerable.Range(0, 10000).Select(x => new LinePoint(x, Math.Sin(x / 1000d))).ToList()),
+                    Enumerable.Range(0, 1000).Select(x => new LinePoint(x, Math.Sin(x / 100d))).ToList()),
                 new LineSerie("Blue series", "rgba(0,0,255,0.75)",
-                    Enumerable.Range(0, 10000).Select(x => new LinePoint(x, Math.Cos(x / 1000d))).ToList())
+                    Enumerable.Range(0, 1000).Select(x => new LinePoint(x, Math.Cos(x / 100d))).ToList())
             );
     }
 }
