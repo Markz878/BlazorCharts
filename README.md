@@ -8,3 +8,7 @@ Library has support for
 All charts work by initializing the corresponding Series-class and following the constructors.
 
 You can find examples in the BlazorCharts.Client project.
+
+## Examples
+Scatter chart:
+  ![Scatter chart](.scatterchart.PNG)
