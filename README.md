@@ -11,4 +11,4 @@ You can find examples in the BlazorCharts.Client project.
 
 ## Examples
 Scatter chart:
-  ![Scatter chart](.scatterchart.PNG)
+<img src="scatterchart.png" alt="drawing" width="400"/>
