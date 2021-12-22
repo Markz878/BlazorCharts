@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9A11680D-856E-4374-B59D-76785550C20D}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
-		scatterchart.PNG = scatterchart.PNG
 	EndProjectSection
 EndProject
 Global
