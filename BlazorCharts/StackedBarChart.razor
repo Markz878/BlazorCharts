@@ -1,4 +1,6 @@
-﻿<svg class="chart" viewBox="0 0 @Width @Height">
+﻿@inherits StackedBarChartBase
+
+<svg class="chart" viewBox="0 0 @Width @Height">
     <text x="@(Width/2)" y="15" font-size="16px" text-anchor="middle">@Title</text>
     <g>
         @foreach (double value in YAxis)

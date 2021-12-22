@@ -5,34 +5,20 @@ using static System.Math;
 
 namespace BlazorCharts;
 
-public partial class StackedBarChart
+public class StackedBarChartBase : BaseChart
 {
     [Parameter] [EditorRequired] public StackedBarSeries Data { get; set; } = default!;
-    [Parameter] public double Width { get; set; } = 700;
-    [Parameter] public double Height { get; set; } = 350;
-    [Parameter] [EditorRequired] public string Title { get; set; } = "";
     [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
 
-    private double YMax;
-
-    private double MarginLeft = 30;
-    private double MarginRight = 30;
-    private const double MarginTop = 30;
-    private const double MarginBottom = 50;
-
-    private bool showTooltip;
-    private string? tooltipX;
-    private string? tooltipY;
-    private string? tooltipXTranslate;
-    private string? tooltipYTranslate;
-    private IEnumerable<string>? tooltipProperties;
+    protected double YMax;
 
     protected override void OnParametersSet()
     {
+        MarginBottom = 50;
         SetLimits();
     }
 
-    private void SetLimits()
+    protected void SetLimits()
     {
         YMax = GetLimit(getElementWiseSum(Data));
         SetMarginLeft(YMax);
@@ -52,19 +38,19 @@ public partial class StackedBarChart
         }
     }
 
-    private void SetMarginRight()
+    protected void SetMarginRight()
     {
         int lastTitleWidth = GetTextPixelWidth(Data.Titles[^1], GetTitleFontsize());
         MarginRight = Max(lastTitleWidth - 90, 10);
     }
 
-    private void SetMarginLeft(double ymax)
+    protected void SetMarginLeft(double ymax)
     {
         double order = Round(Log10(ymax));
         MarginLeft = order * 10 + 30;
     }
 
-    private static double GetLimit(IEnumerable<double> values)
+    protected static double GetLimit(IEnumerable<double> values)
     {
         double maxVal = values.Max();
         double order = Pow(10, Round(Log10(maxVal)));
@@ -72,9 +58,9 @@ public partial class StackedBarChart
         return maxLimit;
     }
 
-    private IEnumerable<double> YAxis => Enumerable.Range(0, 11).Select(x => YMax * x / 10);
+    protected IEnumerable<double> YAxis => Enumerable.Range(0, 11).Select(x => YMax * x / 10);
 
-    private double GetXCoordinate(int order)
+    protected double GetXCoordinate(int order)
     {
         if (Data.Titles.Count == 1)
         {
@@ -85,24 +71,24 @@ public partial class StackedBarChart
         return result;
     }
 
-    private double GetBarWidth()
+    protected double GetBarWidth()
     {
         return Max(Width / Data.Titles.Count * 0.3, 35);
     }
 
-    private double GetBarHeight(double value)
+    protected double GetBarHeight(double value)
     {
         double result = value / YMax * (Height - MarginTop - MarginBottom);
         return result;
     }
 
-    private double GetYCoordinate(double value)
+    protected double GetYCoordinate(double value)
     {
         double result = Height - MarginBottom - value / YMax * (Height - MarginTop - MarginBottom);
         return result;
     }
 
-    private double GetXOffsetBetweenColumns()
+    protected double GetXOffsetBetweenColumns()
     {
         if (Data.Titles.Count == 1)
         {
@@ -113,12 +99,12 @@ public partial class StackedBarChart
         return result;
     }
 
-    private static int GetTextPixelWidth(string text, int fontsize)
+    protected static int GetTextPixelWidth(string text, int fontsize)
     {
         return text.Length * fontsize / 2;
     }
 
-    private int GetTitleFontsize()
+    protected int GetTitleFontsize()
     {
         double xOffset = GetXOffsetBetweenColumns();
         int fontSize = 12;
@@ -143,7 +129,7 @@ public partial class StackedBarChart
         return fontSize;
     }
 
-    private string GetTitleTransform(int columnIndex)
+    protected string GetTitleTransform(int columnIndex)
     {
         int maxTitleLength = Data.Titles.Max(x => x.Length);
         double x = GetXCoordinate(columnIndex);
@@ -153,7 +139,7 @@ public partial class StackedBarChart
         return $"rotate({rotation},{x},{y})";
     }
 
-    private void MouseOver(int serieIndex, int columnIndex)
+    protected void MouseOver(int serieIndex, int columnIndex)
     {
         if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties is not null)
         {
@@ -174,7 +160,7 @@ public partial class StackedBarChart
         }
     }
 
-    private void MouseLeave()
+    protected void MouseLeave()
     {
         showTooltip = false;
     }
