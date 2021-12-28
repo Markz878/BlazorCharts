@@ -19,15 +19,16 @@ namespace BlazorCharts
             {
                 double x = GetXCoordinate(p.X);
                 double y = GetYCoordinate(p.Y);
-                tooltipInfo = new TooltipInfo($"{x}px", $"{y}px", x < Width / 2 ? "0" : "-100%", y < Height / 2 ? "0" : "-100%",
-                    p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}"));
+                string X = x < Width / 2 ? $"{x}px" : $"calc({x}px - 100%)";
+                string Y = y < Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
+                tooltipInfo = new TooltipInfo(X, Y, p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}"));
                 showTooltip = true;
             }
         }
 
         protected void MouseLeave()
         {
-            showTooltip = false;
+            //showTooltip = false;
         }
 
         protected IEnumerable<(string title, string color)> GetTitles()

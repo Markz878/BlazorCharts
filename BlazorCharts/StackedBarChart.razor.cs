@@ -46,7 +46,7 @@ public class StackedBarChartBase : BaseChart
     protected void SetMarginRight()
     {
         int lastTitleWidth = GetTextPixelWidth(Data.Titles[^1], GetTitleFontsize());
-        MarginRight = Max(lastTitleWidth - 90, 10);
+        MarginRight = Max(lastTitleWidth - 80, 10);
     }
 
     protected void SetMarginLeft(double ymax)
@@ -148,7 +148,7 @@ public class StackedBarChartBase : BaseChart
     {
         if (Data.Series[serieIndex].Values[columnIndex].TooltipProperties is not null)
         {
-            double x = GetXCoordinate(columnIndex) + (columnIndex < Data.Titles.Count / 2 + 1 ? GetBarWidth() / 2 + 3 : -GetBarWidth() / 2 - 3);
+            double x = GetXCoordinate(columnIndex);
             double sum = 0;
             for (int i = 0; i < serieIndex; i++)
             {
@@ -156,8 +156,9 @@ public class StackedBarChartBase : BaseChart
             }
             sum += Data.Series[serieIndex].Values[columnIndex].Value / 2;
             double y = GetYCoordinate(sum);
-            tooltipInfo = new($"{x}px", $"{y}px", x <= Width / 2 + GetBarWidth() ? "0" : "-100%", y <= Height / 2 ? "0" : "-100%",
-                Data.Series[serieIndex].Values[columnIndex].TooltipProperties!.Select(x => $"{x.Key}: {x.Value}"));
+            string X = x < Width / 2 ? $"{x + GetBarWidth()/2 + 3}px" : $"calc({x-GetBarWidth()/2 - 3}px - 100%)";
+            string Y = y <= Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
+            tooltipInfo = new(X, Y, Data.Series[serieIndex].Values[columnIndex].TooltipProperties!.Select(x => $"{x.Key}: {x.Value}"));
             showTooltip = true;
         }
     }

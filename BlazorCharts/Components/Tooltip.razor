@@ -2,7 +2,7 @@
 {
     <g>
         <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
-            <div class="tooltip-container" style="transform: translate(@TooltipInfo.X, @TooltipInfo.Y) translate(@TooltipInfo.XTranslate, @TooltipInfo.YTranslate)">
+            <div class="tooltip-container" style="transform: translate(@TooltipInfo.X, @TooltipInfo.Y);">
                 @foreach (string tt in TooltipInfo.Properties)
                 {
                     <p class="tooltip-text">@tt</p>
