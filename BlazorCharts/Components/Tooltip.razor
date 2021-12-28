@@ -1,0 +1,19 @@
+﻿@if(TooltipInfo is not null && TooltipInfo.Properties is not null)
+{
+    <g>
+        <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
+            <div class="tooltip-container" style="transform: translate(@TooltipInfo.X, @TooltipInfo.Y) translate(@TooltipInfo.XTranslate, @TooltipInfo.YTranslate)">
+                @foreach (string tt in TooltipInfo.Properties)
+                {
+                    <p class="tooltip-text">@tt</p>
+                }
+            </div>
+        </foreignObject>
+    </g>
+}
+
+@code {
+    [Parameter] [EditorRequired] public double Width { get; set; }
+    [Parameter] [EditorRequired] public double Height { get; set; }
+    [Parameter] [EditorRequired] public TooltipInfo TooltipInfo { get; set; } = default!;
+}

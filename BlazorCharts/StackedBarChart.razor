@@ -58,30 +58,10 @@
     </g>
     @if (ShowLegend)
     {
-        <g>
-            <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
-                <div class="legend-container">
-                    @for (int i = 0; i < Data.Series.Count; i++)
-                    {
-                        int index = i;
-                        <div class="legend-colorbox" style="background: @Data.Series[index].Color"></div>
-                        <div class="legend-text">@Data.Series[index].Title</div>
-                    }
-                </div>
-            </foreignObject>
-        </g>
+        <Legend Height="Height" Width="Width" Titles="GetTitles()"/>
     }
-    @if (showTooltip && tooltipProperties is not null)
+    @if (showTooltip)
     {
-        <g>
-            <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
-                <div class="tooltip-container" style="transform: translate(@tooltipX, @tooltipY) translate(@tooltipXTranslate, @tooltipYTranslate)">
-                    @foreach (string tt in tooltipProperties)
-                    {
-                        <p class="tooltip-text">@tt</p>
-                    }
-                </div>
-            </foreignObject>
-        </g>
+        <Tooltip Height="Height" Width="Width" TooltipInfo="tooltipInfo"/>
     }
 </svg>

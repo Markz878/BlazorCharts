@@ -17,5 +17,10 @@ namespace BlazorCharts
         {
             return string.Join(" ", serie.Points.Select(x => $"{GetXCoordinate(x.X)},{GetYCoordinate(x.Y)}"));
         }
+
+        protected IEnumerable<(string title, string color)> GetTitles()
+        {
+            return Data.Series.Select(x=>(x.Title, x.Color));
+        }
     }
 }

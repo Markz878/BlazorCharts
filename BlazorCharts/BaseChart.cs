@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using BlazorCharts.Utilities;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorCharts;
 
@@ -15,9 +16,5 @@ public abstract class BaseChart : ComponentBase
     protected double MarginBottom;
 
     protected bool showTooltip;
-    protected string? tooltipX;
-    protected string? tooltipY;
-    protected string? tooltipXTranslate;
-    protected string? tooltipYTranslate;
-    protected IEnumerable<string>? tooltipProperties;
+    protected TooltipInfo? tooltipInfo;
 }

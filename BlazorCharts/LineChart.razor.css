@@ -27,18 +27,6 @@
     }
 }
 
-.tooltip-container {
-    display: inline-block;
-    background-color: rgb(240, 240, 240);
-    border: 1px solid black;
-    border-radius: 15px;
-    padding: 2px 5px;
-}
-
-.tooltip-text {
-    font-size: 10px;
-    margin: 0 4px;
-}
 
 .legend-container {
     display: flex;

@@ -156,11 +156,8 @@ public class StackedBarChartBase : BaseChart
             }
             sum += Data.Series[serieIndex].Values[columnIndex].Value / 2;
             double y = GetYCoordinate(sum);
-            tooltipX = $"{x}px";
-            tooltipY = $"{y}px";
-            tooltipXTranslate = x <= Width / 2 + GetBarWidth() ? "0" : "-100%";
-            tooltipYTranslate = y <= Height / 2 ? "0" : "-100%";
-            tooltipProperties = Data.Series[serieIndex].Values[columnIndex].TooltipProperties?.Select(x => $"{x.Key}: {x.Value}");
+            tooltipInfo = new($"{x}px", $"{y}px", x <= Width / 2 + GetBarWidth() ? "0" : "-100%", y <= Height / 2 ? "0" : "-100%",
+                Data.Series[serieIndex].Values[columnIndex].TooltipProperties!.Select(x => $"{x.Key}: {x.Value}"));
             showTooltip = true;
         }
     }
@@ -168,5 +165,10 @@ public class StackedBarChartBase : BaseChart
     protected void MouseLeave()
     {
         showTooltip = false;
+    }
+
+    protected IEnumerable<(string title, string color)> GetTitles()
+    {
+        return Data.Series.Select(x => (x.Title, x.Color));
     }
 }

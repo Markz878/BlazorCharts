@@ -1,4 +1,5 @@
 ﻿using BlazorCharts.PlotDataModels;
+using BlazorCharts.Utilities;
 using Microsoft.AspNetCore.Components;
 
 namespace BlazorCharts
@@ -18,11 +19,8 @@ namespace BlazorCharts
             {
                 double x = GetXCoordinate(p.X);
                 double y = GetYCoordinate(p.Y);
-                tooltipX = $"{x}px";
-                tooltipY = $"{y}px";
-                tooltipXTranslate = x < Width / 2 ? "0" : "-100%";
-                tooltipYTranslate = y < Height / 2 ? "0" : "-100%";
-                tooltipProperties = p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}");
+                tooltipInfo = new TooltipInfo($"{x}px", $"{y}px", x < Width / 2 ? "0" : "-100%", y < Height / 2 ? "0" : "-100%",
+                    p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}"));
                 showTooltip = true;
             }
         }
@@ -30,6 +28,11 @@ namespace BlazorCharts
         protected void MouseLeave()
         {
             showTooltip = false;
+        }
+
+        protected IEnumerable<(string title, string color)> GetTitles()
+        {
+            return Data.Series.Select(x => (x.Title, x.Color));
         }
     }
 }
