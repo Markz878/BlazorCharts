@@ -12,7 +12,7 @@
         @foreach (double value in YAxis)
         {
             <text>
-                <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value</text>
+                <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>

@@ -15,6 +15,8 @@ public abstract class BaseChart : ComponentBase
     protected double MarginTop = 30;
     protected double MarginBottom;
 
+    protected string StringFormat = "G6";
+
     protected bool showTooltip;
     protected TooltipInfo? tooltipInfo;
 }

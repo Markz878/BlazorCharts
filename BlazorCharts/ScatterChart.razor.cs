@@ -28,7 +28,7 @@ namespace BlazorCharts
 
         protected void MouseLeave()
         {
-            //showTooltip = false;
+            showTooltip = false;
         }
 
         protected IEnumerable<(string title, string color)> GetTitles()

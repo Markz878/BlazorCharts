@@ -21,18 +21,15 @@ public abstract class XYBaseChart : BaseChart
     {
         (XMin, XMax) = GetLimits(xValues);
         (YMin, YMax) = GetLimits(yValues);
-        SetMarginLeft(yValues);
+        SetMarginLeft();
         SetMarginBottom();
-        SetMarginRight(xValues);
+        SetMarginRight();
     }
 
-    private void SetMarginRight(IEnumerable<double> xValues)
+    private void SetMarginRight()
     {
-        double minVal = xValues.Min();
-        double maxVal = xValues.Max();
-        double diff = maxVal - minVal;
-        double order = Round(Log10(diff));
-        MarginRight = Max(order, 1) * 5 + 5;
+        int xAxisLastTextLength = XAxis.Last().ToString(StringFormat).Length;
+        MarginRight = xAxisLastTextLength * 5 + 5;
     }
 
     private void SetMarginBottom()
@@ -40,13 +37,10 @@ public abstract class XYBaseChart : BaseChart
         MarginBottom = ShowLegend ? 70 : 35;
     }
 
-    private void SetMarginLeft(IEnumerable<double> xValues)
+    private void SetMarginLeft()
     {
-        double minVal = xValues.Min();
-        double maxVal = xValues.Max();
-        double diff = maxVal - minVal;
-        double order = Round(Log10(diff));
-        MarginLeft = Max(order, 2) * 10 + 30;
+        int yAxisTextMaxLength = YAxis.Select(x=> x.ToString(StringFormat).Length).Max();
+        MarginLeft = yAxisTextMaxLength * 5 + 30;
     }
 
     private static (double min, double max) GetLimits(IEnumerable<double> values)
@@ -54,9 +48,9 @@ public abstract class XYBaseChart : BaseChart
         double minVal = values.Min();
         double maxVal = values.Max();
         double diff = maxVal - minVal;
-        double order = Pow(10, Round(Log10(diff)));
-        double maxLimit = MathUtilities.RoundTo10(maxVal, order, true);
+        double order = Pow(10, Round(Log10(diff)) - 1);
         double minLimit = MathUtilities.RoundTo10(minVal, order, false);
+        double maxLimit = MathUtilities.RoundTo10(maxVal, order, true);
         return (minLimit, maxLimit);
     }
 
