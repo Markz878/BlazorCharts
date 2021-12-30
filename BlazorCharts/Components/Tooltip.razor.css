@@ -1,4 +1,9 @@
-﻿.tooltip-container {
+﻿@font-face {
+    font-family: Inconsolata;
+    src: url(Inconsolata-Regular.ttf);
+}
+
+.tooltip-container {
     display: inline-block;
     background-color: rgb(240, 240, 240);
     border: 1px solid black;
@@ -9,4 +14,5 @@
 .tooltip-text {
     font-size: 10px;
     margin: 0 4px;
+    font-family: Inconsolata;
 }

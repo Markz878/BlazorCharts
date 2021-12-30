@@ -9,7 +9,7 @@ internal static class MathUtilities
         return (number, order, toPositiveInfinity) switch
         {
             (_, >= 1, true) => Ceiling(number / order) * order,
-            (_, < 1, _) => Round(number, (int)Log10(1 / order), MidpointRounding.AwayFromZero),
+            (_, < 1, _) => Round(number, (int)Log10(10 / order), MidpointRounding.AwayFromZero),
             (_, >= 1, false) => Floor(number / order) * order,
             _ => throw new NotImplementedException(),
         };

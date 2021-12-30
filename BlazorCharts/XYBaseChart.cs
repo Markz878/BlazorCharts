@@ -29,7 +29,7 @@ public abstract class XYBaseChart : BaseChart
     private void SetMarginRight()
     {
         int xAxisLastTextLength = XAxis.Last().ToString(StringFormat).Length;
-        MarginRight = xAxisLastTextLength * 5 + 5;
+        MarginRight = xAxisLastTextLength * 6 + 5;
     }
 
     private void SetMarginBottom()
@@ -40,7 +40,7 @@ public abstract class XYBaseChart : BaseChart
     private void SetMarginLeft()
     {
         int yAxisTextMaxLength = YAxis.Select(x=> x.ToString(StringFormat).Length).Max();
-        MarginLeft = yAxisTextMaxLength * 5 + 30;
+        MarginLeft = yAxisTextMaxLength * 6 + 30;
     }
 
     private static (double min, double max) GetLimits(IEnumerable<double> values)

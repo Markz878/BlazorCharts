@@ -158,7 +158,7 @@ public class StackedBarChartBase : BaseChart
             double y = GetYCoordinate(sum);
             string X = x < Width / 2 ? $"{x + GetBarWidth()/2 + 3}px" : $"calc({x-GetBarWidth()/2 - 3}px - 100%)";
             string Y = y <= Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
-            tooltipInfo = new(X, Y, Data.Series[serieIndex].Values[columnIndex].TooltipProperties!.Select(x => $"{x.Key}: {x.Value}"));
+            tooltipInfo = new(X, Y, Data.Series[serieIndex].Values[columnIndex].TooltipProperties!);
             showTooltip = true;
         }
     }

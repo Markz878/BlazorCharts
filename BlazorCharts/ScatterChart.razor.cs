@@ -21,7 +21,7 @@ namespace BlazorCharts
                 double y = GetYCoordinate(p.Y);
                 string X = x < Width / 2 ? $"{x}px" : $"calc({x}px - 100%)";
                 string Y = y < Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
-                tooltipInfo = new TooltipInfo(X, Y, p.TooltipProperties.Select(x => $"{x.Key}: {x.Value}"));
+                tooltipInfo = new TooltipInfo(X, Y, p.TooltipProperties);
                 showTooltip = true;
             }
         }

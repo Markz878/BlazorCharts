@@ -4,7 +4,7 @@ public class StackedBarItem
 {
     public double Value { get; }
 
-    public StackedBarItem(double value, Dictionary<string, string>? tooltips = null)
+    public StackedBarItem(double value, IEnumerable<string>? tooltips = null)
     {
         if (value < 0)
         {
@@ -14,5 +14,5 @@ public class StackedBarItem
         TooltipProperties = tooltips;
     }
 
-    public Dictionary<string, string>? TooltipProperties { get; }
+    public IEnumerable<string>? TooltipProperties { get; }
 }
