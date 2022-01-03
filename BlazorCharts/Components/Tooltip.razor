@@ -1,7 +1,7 @@
 ﻿@if(TooltipInfo is not null && TooltipInfo.Properties is not null)
 {
     <g>
-        <foreignObject x="0" y="0" width="@Width" height="@Height" style="pointer-events: none;">
+        <foreignObject x="0" y="0" width=@Width height=@Height style="pointer-events: none; font-size: @FontSize;">
             <div class="tooltip-container" style="transform: translate(@TooltipInfo.X, @TooltipInfo.Y);">
                 @foreach (string tt in TooltipInfo.Properties)
                 {
@@ -16,4 +16,5 @@
     [Parameter] [EditorRequired] public double Width { get; set; }
     [Parameter] [EditorRequired] public double Height { get; set; }
     [Parameter] [EditorRequired] public TooltipInfo TooltipInfo { get; set; } = default!;
+    [Parameter] public string FontSize { get; set; } = "10px";
 }

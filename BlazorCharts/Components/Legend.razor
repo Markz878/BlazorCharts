@@ -1,12 +1,12 @@
 ﻿@if(Titles is not null)
 {
     <g>
-        <foreignObject x="0" y="@(Height-20)" width="@Width" height="20">
+        <foreignObject x="0" y=@(Height-20)" width=@Width" height="20">
             <div class="legend-container">
                 @foreach(var title in Titles)
                 {
-                    <div class="legend-colorbox" style="background: @title.color"></div>
-                    <div class="legend-text">@title.title</div>
+                    <div class="legend-colorbox" style="background: @title.color; width: @FontSize; height: @FontSize"></div>
+                    <div class="legend-text" style="font-size: @FontSize; color: @FontColor">@title.title</div>
                 }
             </div>
         </foreignObject>
@@ -17,4 +17,6 @@
     [Parameter] [EditorRequired] public double Width { get; set; }
     [Parameter] [EditorRequired] public double Height { get; set; }
     [Parameter] [EditorRequired] public IEnumerable<(string title, string color)>? Titles { get; set; }
+    [Parameter] public string FontSize { get; set; } = "10px";
+    [Parameter] public string FontColor { get; set; } = "black";
 }

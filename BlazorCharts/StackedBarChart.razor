@@ -1,29 +1,29 @@
 ﻿@inherits StackedBarChartBase
 
 <svg class="chart" viewBox="0 0 @Width @Height">
-    <text x="@(Width/2)" y="15" font-size="16px" text-anchor="middle">@Title</text>
+    <ChartTitle Width=@Width Title=@Title FontSize=@TitleFontSize FontColor=@FontColor/>
     <g>
         @foreach (double value in YAxis)
         {
-            <line x1="@MarginLeft" y1="@GetYCoordinate(value)" x2="@(Width - MarginRight)" y2="@GetYCoordinate(value)" style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1=@MarginLeft y1=@GetYCoordinate(value) x2=@(Width - MarginRight) y2=@GetYCoordinate(value) style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>
         @foreach (double value in YAxis)
         {
             <text>
-                <text x="@(MarginLeft-10)" y="@GetYCoordinate(value)" font-size="12px" text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
+                <text x=@(MarginLeft-10) y=@GetYCoordinate(value) font-size=@FontSize fill=@FontColor text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>
     <g transform="rotate(270, 10, @(Height/2))">
-        <text x="10" y="@(Height/2)" font-size="12px" text-anchor="middle" dominant-baseline="middle">@YAxisTitle</text>
+        <text x="10" y=@(Height/2) font-size=@FontSize fill=@FontColor text-anchor="middle" dominant-baseline="middle">@YAxisTitle</text>
     </g>
     <g>
         @foreach ((string title, int index) in Data.Titles.Select((x, i) => (x, i)))
         {
             <text>
-                <text x="@GetXCoordinate(index)" y="@(Height-MarginBottom+20)" font-size="@GetTitleFontsize()" transform="@GetTitleTransform(index)" text-anchor="middle" class="monospaced">@title</text>
+                <text x=@GetXCoordinate(index) y=@(Height-MarginBottom+20) font-size=@GetColumnTitleFontsize() fill=@FontColor transform=@GetTitleTransform(index) text-anchor="middle" class="monospaced">@title</text>
             </text>
         }
     </g>
@@ -36,7 +36,7 @@
             {
                 int serieIndex = j;
                 sum += Data.Series[serieIndex].Values[columnIndex].Value;
-                <rect x="@(GetXCoordinate(columnIndex)-GetBarWidth()/2)" y="@GetYCoordinate(sum)" height="@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)" width="@GetBarWidth()" stroke="black" stroke-width="1" fill="@Data.Series[serieIndex].Color" rx="2" class="data-item bar-animate" @onmouseover="()=>MouseOver(serieIndex, columnIndex)" @onmouseout="MouseLeave" />
+                <rect x=@(GetXCoordinate(columnIndex)-GetBarWidth()/2) y=@GetYCoordinate(sum) height=@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value) width=@GetBarWidth() stroke="black" stroke-width="1" fill=@Data.Series[serieIndex].Color rx="2" class="data-item bar-animate" @onmouseover=@(()=>MouseOver(serieIndex, columnIndex)) @onmouseout=@MouseLeave/>
             }
         }
         @if (Data.ShowLabels)
@@ -50,7 +50,7 @@
                     int serieIndex = j;
                     sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x="@GetXCoordinate(columnIndex)" y="@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3))" font-size="@(Data.Titles.Count < 6 ? "12px" : "9px")" fill="@Data.Series[serieIndex].TextColor" class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
+                        <text x=@GetXCoordinate(columnIndex) y=@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3)) font-size=@LabelFontSize fill=@Data.Series[serieIndex].LabelColor class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
                     </text>
                 }
             }
@@ -58,10 +58,10 @@
     </g>
     @if (ShowLegend)
     {
-        <Legend Height="Height" Width="Width" Titles="GetTitles()"/>
+        <Legend Height=@Height Width=@Width Titles=@GetTitles() FontSize=@FontSize FontColor=@FontColor/>
     }
     @if (showTooltip)
     {
-        <Tooltip Height="Height" Width="Width" TooltipInfo="tooltipInfo"/>
+        <Tooltip Height=@Height Width=@Width TooltipInfo=@tooltipInfo FontSize=@FontSize/>
     }
 </svg>

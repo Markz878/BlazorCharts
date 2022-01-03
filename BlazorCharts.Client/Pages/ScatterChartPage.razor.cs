@@ -13,10 +13,10 @@ namespace BlazorCharts.Client.Pages
             data = new ScatterSeries(
                 new ScatterSerie("Red series", "rgba(255,0,0,0.75)",
                     Enumerable.Range(0, 20).Select(_ => 
-                        new ScatterPoint(x = Random.Shared.NextDouble() * 100, y = Random.Shared.NextDouble() * 1000-500, GetTooltip(x,y))).ToList()),
+                        new ScatterPoint(x = Random.Shared.NextDouble() * 100, y = Random.Shared.NextDouble() * 1000-500, 4, GetTooltip(x,y))).ToList()),
                 new ScatterSerie("Blue series", "rgba(0,0,255,0.75)",
                     Enumerable.Range(0, 20).Select(_ => 
-                        new ScatterPoint(x = Random.Shared.NextDouble() * 100, y = Random.Shared.NextDouble() * 1000-500, GetTooltip(x, y))).ToList())
+                        new ScatterPoint(x = Random.Shared.NextDouble() * 100, y = Random.Shared.NextDouble() * 1000-500, 4, GetTooltip(x, y))).ToList())
             );
         }
 

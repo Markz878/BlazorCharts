@@ -1,0 +1,8 @@
+﻿<text x=@(Width/2) y="15" font-size=@FontSize text-anchor="middle" fill=@FontColor>@Title</text>
+
+@code {
+    [Parameter] [EditorRequired] public double Width { get; set; }
+    [Parameter] [EditorRequired] public string? Title { get; set; }
+    [Parameter] public string FontSize { get; set; } = "16px";
+    [Parameter] public string FontColor { get; set; } = "black";
+}

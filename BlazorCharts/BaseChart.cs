@@ -9,6 +9,9 @@ public abstract class BaseChart : ComponentBase
     [Parameter] public double Width { get; set; } = 700;
     [Parameter] public double Height { get; set; } = 350;
     [Parameter] public bool ShowLegend { get; set; } = true;
+    [Parameter] public string FontSize { get; set; } = "12px";
+    [Parameter] public string FontColor { get; set; } = "yellow";
+    [Parameter] public string TitleFontSize { get; set; } = "16px";
 
     protected double MarginLeft;
     protected double MarginRight = 10;
@@ -19,4 +22,27 @@ public abstract class BaseChart : ComponentBase
 
     protected bool showTooltip;
     protected TooltipInfo? tooltipInfo;
+
+    protected double GetFontSizePixels()
+    {
+        return GetFontSizeAsNumber() / 2;
+    }
+
+    protected double GetFontSizeAsNumber()
+    {
+        int j = 0;
+        for (j = 0; j < FontSize.Length; j++)
+        {
+            char c = FontSize[j];
+            if (!char.IsNumber(c) && c is not '.')
+            {
+                break;
+            }
+        }
+        if (double.TryParse(FontSize[0..j], out double result))
+        {
+            return result;
+        }
+        throw new ArgumentException($"Fontsize {FontSize} is in incorrect format.", nameof(FontSize));
+    }
 }

@@ -6,7 +6,6 @@ namespace BlazorCharts
     public class LineChartBase : XYBaseChart
     {
         [Parameter] [EditorRequired] public LineSeries Data { get; set; } = default!;
-        [Parameter] public double LineWidth { get; set; } = 2;
 
         protected override void OnParametersSet()
         {

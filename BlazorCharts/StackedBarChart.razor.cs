@@ -9,6 +9,7 @@ public class StackedBarChartBase : BaseChart
 {
     [Parameter] [EditorRequired] public StackedBarSeries Data { get; set; } = default!;
     [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
+    [Parameter] public string LabelFontSize { get; set; } = "10px";
 
     protected double YMax;
 
@@ -45,7 +46,7 @@ public class StackedBarChartBase : BaseChart
 
     protected void SetMarginRight()
     {
-        int lastTitleWidth = GetTextPixelWidth(Data.Titles[^1], GetTitleFontsize());
+        int lastTitleWidth = GetTextPixelWidth(Data.Titles[^1], GetColumnTitleFontsize());
         MarginRight = Max(lastTitleWidth - 80, 10);
     }
 
@@ -109,7 +110,7 @@ public class StackedBarChartBase : BaseChart
         return text.Length * fontsize / 2;
     }
 
-    protected int GetTitleFontsize()
+    protected int GetColumnTitleFontsize()
     {
         double xOffset = GetXOffsetBetweenColumns();
         int fontSize = 12;
@@ -139,7 +140,7 @@ public class StackedBarChartBase : BaseChart
         int maxTitleLength = Data.Titles.Max(x => x.Length);
         double x = GetXCoordinate(columnIndex);
         double y = Height - MarginBottom + 20;
-        int size = GetTitleFontsize();
+        int size = GetColumnTitleFontsize();
         int rotation = size >= 9 ? 0 : -8;
         return $"rotate({rotation},{x},{y})";
     }

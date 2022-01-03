@@ -40,7 +40,7 @@ public abstract class XYBaseChart : BaseChart
     private void SetMarginLeft()
     {
         int yAxisTextMaxLength = YAxis.Select(x=> x.ToString(StringFormat).Length).Max();
-        MarginLeft = yAxisTextMaxLength * 6 + 30;
+        MarginLeft = yAxisTextMaxLength * GetFontSizePixels() + 30;
     }
 
     private static (double min, double max) GetLimits(IEnumerable<double> values)
