@@ -25,15 +25,15 @@
 }
 
     .data-item:hover {
-        filter: brightness(75%) drop-shadow(0 0 2px rgba(0,0,0,0.75));
+        filter: brightness(75%) drop-shadow(0 0 3px rgba(0,0,0,0.75));
         transition: ease-in-out 0.1s;
     }
 
-.bar-animate {
-    animation: bar-transform 0.8s ease-out;
+.pie-animate {
+    animation: pie-transform 0.8s ease-out;
 }
 
-@keyframes bar-transform {
+@keyframes pie-transform {
     0% {
         transform: scaleY(10%) translateY(100%);
     }

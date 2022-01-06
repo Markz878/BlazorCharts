@@ -6,14 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Authors>Markz878</Authors>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Description>A collection of chart components for Blazor. Includes LineChart, ScatterChart and StackedBarChart.</Description>
+    <Description>A collection of chart components for Blazor. Includes LineChart, ScatterChart, StackedBarChart and PieChart.</Description>
     <PackageIcon>chart-icon.png</PackageIcon>
-    <PackageTags>blazor;charts;line;scatter;stacked;bar;chart</PackageTags>
+    <PackageTags>blazor;charts;line;scatter;stacked;bar;pie;chart</PackageTags>
     <PackageId>BlazorSVGCharts</PackageId>
     <Product></Product>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.0.6</Version>
+    <Version>1.0.8</Version>
     <RepositoryUrl>https://github.com/Markz878/BlazorCharts</RepositoryUrl>
   </PropertyGroup>
 

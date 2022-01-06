@@ -12,7 +12,7 @@
 }
 
     .datapoint:hover {
-        filter: brightness(50%);
+        filter: brightness(75%) drop-shadow(0 0 2px rgba(0,0,0,0.75));
         transition: ease-in-out 0.1s;
     }
 
