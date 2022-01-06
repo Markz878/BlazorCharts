@@ -24,3 +24,7 @@ Stacked bar chart:
 
 <img src="screenshots/stackedbarchart.png" alt="line chart" width="600"/>
 
+Pie chart:
+
+<img src="screenshots/piechart.png" alt="pie chart" width="600"/>
+

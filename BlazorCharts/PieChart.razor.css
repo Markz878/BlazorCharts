@@ -6,15 +6,6 @@
     user-select: none;
 }
 
-@font-face {
-    font-family: Inconsolata;
-    src: url(Inconsolata-Regular.ttf);
-}
-
-.monospaced {
-    font-family: Inconsolata;
-}
-
 .data-label {
     pointer-events: none;
     text-anchor: middle;
