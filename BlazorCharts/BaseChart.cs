@@ -6,11 +6,11 @@ namespace BlazorCharts;
 public abstract class BaseChart : ComponentBase
 {
     [Parameter] [EditorRequired] public string Title { get; set; } = "";
-    [Parameter] public double Width { get; set; } = 700;
+    [Parameter] public double Width { get; set; } = 600;
     [Parameter] public double Height { get; set; } = 350;
     [Parameter] public bool ShowLegend { get; set; } = true;
     [Parameter] public string FontSize { get; set; } = "12px";
-    [Parameter] public string FontColor { get; set; } = "yellow";
+    [Parameter] public string FontColor { get; set; } = "black";
     [Parameter] public string TitleFontSize { get; set; } = "16px";
 
     protected double MarginLeft;
