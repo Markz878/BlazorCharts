@@ -11,7 +11,7 @@
             @if (Data.ShowLabels)
             {
                 <text>
-                    <text x=@GetX(sum+p.Value/2, R * 0.7) y=@GetY(sum+p.Value/2, R * 0.7) font-size=@LabelFontSize fill=@p.LabelColor class="data-label pie-animate">@p.Value</text>
+                    <text x=@GetX(sum+p.Value/2, R * 0.7) y=@GetY(sum+p.Value/2, R * 0.7) font-size=@LabelFontSize fill=@p.LabelColor class="data-label pie-animate" dominant-baseline="middle">@p.Value.ToString("G7")</text>
                 </text>
             }
             sum += p.Value;
