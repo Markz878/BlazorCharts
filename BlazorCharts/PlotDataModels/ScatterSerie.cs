@@ -2,6 +2,10 @@
 
 public class ScatterSerie
 {
+    public string Title { get; set; }
+    public string Color { get; set; }
+    public IList<ScatterPoint> Points { get; }
+
     public ScatterSerie(string title, string color, IList<ScatterPoint> points)
     {
         ArgumentNullException.ThrowIfNull(title);
@@ -15,8 +19,4 @@ public class ScatterSerie
         Color = color;
         Points = points;
     }
-
-    public string Title { get; }
-    public string Color { get; }
-    public IList<ScatterPoint> Points { get; }
 }

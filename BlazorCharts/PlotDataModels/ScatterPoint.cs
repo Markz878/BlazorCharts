@@ -2,6 +2,11 @@
 
 public class ScatterPoint
 {
+    public double X { get; set; }
+    public double Y { get; set; }
+    public double R { get; set; }
+    public IEnumerable<string>? TooltipProperties { get; }
+
     public ScatterPoint(double x, double y, double r = 4, IEnumerable<string>? tooltips = null)
     {
         X = x;
@@ -9,9 +14,4 @@ public class ScatterPoint
         R = r; 
         TooltipProperties = tooltips;
     }
-
-    public double X { get; }
-    public double Y { get; }
-    public double R { get; }
-    public IEnumerable<string>? TooltipProperties { get; }
 }

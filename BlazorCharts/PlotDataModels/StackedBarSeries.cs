@@ -2,6 +2,10 @@
 
 public class StackedBarSeries
 {
+    public IList<string> Titles { get; }
+    public IList<StackedBarSerie> Series { get; }
+    public bool ShowLabels { get; set; }
+
     public StackedBarSeries(IList<string> titles, bool showLabels, params StackedBarSerie[] series)
     {
         ArgumentNullException.ThrowIfNull(titles);
@@ -28,8 +32,4 @@ public class StackedBarSeries
         ShowLabels = showLabels;
         Series = series;
     }
-
-    public IList<string> Titles { get; }
-    public IList<StackedBarSerie> Series { get; }
-    public bool ShowLabels { get; }
 }

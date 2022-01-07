@@ -2,7 +2,8 @@
 
 public class StackedBarItem
 {
-    public double Value { get; }
+    public double Value { get; set; }
+    public IEnumerable<string>? TooltipProperties { get; }
 
     public StackedBarItem(double value, IEnumerable<string>? tooltips = null)
     {
@@ -13,6 +14,4 @@ public class StackedBarItem
         Value = value;
         TooltipProperties = tooltips;
     }
-
-    public IEnumerable<string>? TooltipProperties { get; }
 }

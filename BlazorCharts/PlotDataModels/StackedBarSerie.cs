@@ -2,6 +2,11 @@
 
 public class StackedBarSerie
 {
+    public string Title { get; set; }
+    public string Color { get; set; }
+    public string LabelColor { get; set; }
+    public IList<StackedBarItem> Values { get; }
+
     public StackedBarSerie(string title, string color, string labelColor, IList<StackedBarItem> values)
     {
         ArgumentNullException.ThrowIfNull(title);
@@ -17,9 +22,4 @@ public class StackedBarSerie
         LabelColor = labelColor;
         Values = values;
     }
-
-    public string Title { get; }
-    public string Color { get; }
-    public string LabelColor { get; }
-    public IList<StackedBarItem> Values { get; }
 }

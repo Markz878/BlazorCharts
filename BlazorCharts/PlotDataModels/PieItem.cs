@@ -2,6 +2,12 @@
 
 public class PieItem
 {
+    public string Title { get; set; }
+    public double Value { get; set; }
+    public string Color { get; set; }
+    public string LabelColor { get; set; }
+    public IEnumerable<string>? TooltipProperties { get; }
+    
     public PieItem(string title, double value, string color, string labelColor = "black", IEnumerable<string>? tooltipProperties = null)
     {
         ArgumentNullException.ThrowIfNull(title, nameof(title));
@@ -16,10 +22,4 @@ public class PieItem
         LabelColor = labelColor;
         TooltipProperties = tooltipProperties;
     }
-
-    public string Title { get; }
-    public double Value { get; }
-    public string Color { get; }
-    public string LabelColor { get; }
-    public IEnumerable<string>? TooltipProperties { get; }
 }

@@ -4,6 +4,11 @@ namespace BlazorCharts.PlotDataModels;
 
 public class LineSerie
 {
+    public string Title { get; set; }
+    public string Color { get; set; }
+    public double Thickness { get; set; }
+    public IList<LinePoint> Points { get; }
+
     public LineSerie(string title, string color, double thickness, IList<LinePoint> points)
     {
         ArgumentNullException.ThrowIfNull(title);
@@ -22,9 +27,4 @@ public class LineSerie
         Thickness = thickness;
         Points = points;
     }
-
-    public string Title { get; }
-    public string Color { get; }
-    public double Thickness { get; }
-    public IList<LinePoint> Points { get; }
 }

@@ -2,7 +2,9 @@
 
 <PageTitle>Stacked Bar Chart</PageTitle>
 
-@if(data is not null)
-{
-    <StackedBarChart Data="data" Width=600 Title="Stacked Bar Chart" YAxisTitle="Y-axis values" TitleFontSize="14px" FontSize="11px" FontColor="rgb(40,40,40)"/>
-}
+<StackedBarChart Data="data" Width=600 Title="Stacked Bar Chart" YAxisTitle="Y-axis values" TitleFontSize="14px" FontSize="11px" FontColor="rgb(40,40,40)"/>
+
+<div class="d-flex justify-content-center mb-4">
+    <button class="btn btn-primary mx-2" @onclick="MovePoints" disabled="@movePoints">Randomize values</button>
+    <button class="btn btn-danger mx-2" @onclick="CancelMove" disabled="@(!movePoints)">Cancel</button>
+</div>
