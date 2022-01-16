@@ -8,7 +8,7 @@ Library has support for
 
 All charts work by initializing the corresponding Series-class from BlazorCharts.PlotDataModels namespace and following the constructors. Then just pass the object to the corresponding chart parameters.
 
-Scatter, stacked bar and pie charts support hover tooltips.
+All charts support hover tooltips.
 
 You can find examples in the BlazorCharts.Client project.
 

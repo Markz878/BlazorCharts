@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages
 {
     public partial class StackedBarChartPage
     {
-        private StackedBarSeries? data;
+        private StackedBarSeries data = default!;
         private bool movePoints;
 
         protected override void OnInitialized()
@@ -21,9 +21,9 @@ namespace BlazorCharts.Client.Pages
             movePoints = true;
             while (movePoints)
             {
-                foreach (StackedBarSerie? item in data.Series)
+                foreach (StackedBarSerie item in data.Series)
                 {
-                    foreach (StackedBarItem? p in item.Values)
+                    foreach (StackedBarItem p in item.Values)
                     {
                         p.Value = Random.Shared.NextDouble() * 95+5;
                     }

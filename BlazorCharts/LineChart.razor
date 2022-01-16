@@ -8,6 +8,9 @@
             <line x1=@MarginLeft y1=@GetYCoordinate(value) x2=@(Width-MarginRight) y2=@GetYCoordinate(value) style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
+    <g>
+        <rect @ref=ChartRectRef x=@MarginLeft y=@MarginTop width=@(Width-MarginLeft-MarginRight) height=@(Height-MarginTop-MarginBottom) fill="transparent" @onmousemove=@((e)=>MouseMove(e)) @onmouseout=@MouseLeave/>
+    </g>
     <g> @*Y-axis tick values*@
         @foreach (double value in YAxis)
         {
@@ -36,9 +39,20 @@
             <polyline points=@GetPolylinePoints(s) class="dataline" style="stroke: @s.Color; stroke-width: @s.Thickness;"/>
         }
     </g>
+    <g>
+
+    </g>
     @if (ShowLegend)
     {
         <Legend Width=@Width Height=@Height Titles=@GetTitles() FontSize=@FontSize FontColor=@FontColor/>
+    }
+    @if (showTooltip)
+    {
+        <Tooltip Height=@Height Width=@Width TooltipInfo=@tooltipInfo FontSize=@FontSize/>
+        @foreach (LineSerie s in Data.Series)
+        {
+            <circle class="datapoint" cx=@GetXCoordinate(s.Points[ChartTooltipIndex].X) cy=@GetYCoordinate(s.Points[ChartTooltipIndex].Y) r=@(s.Thickness+1) stroke="black" stroke-width="1" fill=@s.Color/>
+        }
     }
 </svg>
 

@@ -4,25 +4,25 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class LineChartPage
 {
-    private LineSeries? data;
+    private LineSeries data = default!;
     private bool movePoints;
 
     protected override void OnInitialized()
     {
         data = new LineSeries(
                 new LineSerie("Red series", "rgba(255,0,0,0.75)", 2,
-                    Enumerable.Range(0, 100).Select(x => new LinePoint(x, Math.Sin(x / 10d) * 1e3)).ToList()),
+                    Enumerable.Range(0, 101).Select(x => new LinePoint(x, Math.Sin(x / 10d) * 1e3)).ToList()),
                 new LineSerie("Blue series", "rgba(0,0,255,0.75)", 2,
-                    Enumerable.Range(0, 100).Select(x => new LinePoint(x, Math.Sin(x / 10d + Math.PI / 2) * -1e3)).ToList())
+                    Enumerable.Range(0, 101).Select(x => new LinePoint(x, Math.Sin(x / 10d + Math.PI / 2) * -1e3)).ToList())
             );
     }
 
-    private async Task MovePoints()
+    private async Task RandomizeLines()
     {
         movePoints = true;
         while (movePoints)
         {
-            foreach (LineSerie? item in data.Series)
+            foreach (LineSerie item in data.Series)
             {
                 double phase = Random.Shared.NextDouble() * Math.PI;
                 for (int i = 0; i < item.Points.Count; i++)

@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class PieChartPage
 {
-    private PieSeries? data;
+    private PieSeries data = default!;
     private bool movePoints;
 
     protected override void OnInitialized()
@@ -21,7 +21,7 @@ public partial class PieChartPage
         movePoints = true;
         while (movePoints)
         {
-            foreach (PieItem? item in data.PieItems)
+            foreach (PieItem item in data.PieItems)
             {
                 item.Value = Random.Shared.NextDouble() * 95 + 5;
             }

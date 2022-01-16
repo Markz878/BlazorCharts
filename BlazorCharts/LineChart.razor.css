@@ -10,12 +10,17 @@
     animation: line-animate 0.8s ease-out;
     transition: ease-in-out 0.1s;
     fill: none;
+    pointer-events: none;
 }
 
     .dataline:hover {
         filter: brightness(75%) drop-shadow(0 0 3px black);
         transition: ease-in-out 0.1s;
     }
+
+.datapoint {
+    pointer-events: none;
+}
 
 @keyframes line-animate {
     0% {
