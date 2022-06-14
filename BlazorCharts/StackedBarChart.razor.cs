@@ -7,8 +7,8 @@ namespace BlazorCharts;
 
 public class StackedBarChartBase : BaseChart
 {
-    [Parameter] [EditorRequired] public StackedBarSeries Data { get; set; } = default!;
-    [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
+    [Parameter][EditorRequired] public StackedBarSeries Data { get; set; } = default!;
+    [Parameter][EditorRequired] public string YAxisTitle { get; set; } = "";
     [Parameter] public string LabelFontSize { get; set; } = "10px";
 
     protected double YMax;

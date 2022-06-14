@@ -7,7 +7,6 @@
 }
 
 .datapoint {
-    animation: scatter-animate 0.8s ease-out;
     transition: ease-in-out 0.1s;
 }
 
@@ -15,6 +14,10 @@
         filter: brightness(75%) drop-shadow(0 0 2px rgba(0,0,0,0.75));
         transition: ease-in-out 0.1s;
     }
+
+.datapoint-animate {
+    animation: scatter-animate 0.8s ease-out;
+}
 
 @keyframes scatter-animate {
     0% {

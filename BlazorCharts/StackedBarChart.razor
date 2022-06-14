@@ -36,7 +36,7 @@
             {
                 int serieIndex = j;
                 sum += Data.Series[serieIndex].Values[columnIndex].Value;
-                <rect x=@(GetXCoordinate(columnIndex)-GetBarWidth()/2) y=@GetYCoordinate(sum) height=@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value) width=@GetBarWidth() stroke="black" stroke-width="1" fill=@Data.Series[serieIndex].Color rx="2" class="data-item bar-animate" @onmouseover=@(()=>MouseOver(serieIndex, columnIndex)) @onmouseout=@MouseLeave/>
+                <rect x=@(GetXCoordinate(columnIndex)-GetBarWidth()/2) y=@GetYCoordinate(sum) height=@GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value) width=@GetBarWidth() stroke="black" stroke-width="1" fill=@Data.Series[serieIndex].Color rx="2" class="data-item @(Animate ? "bar-animate" : "")" @onmouseover=@(()=>MouseOver(serieIndex, columnIndex)) @onmouseout=@MouseLeave/>
             }
         }
         @if (Data.ShowLabels)
@@ -50,7 +50,7 @@
                     int serieIndex = j;
                     sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x=@GetXCoordinate(columnIndex) y=@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3)) font-size=@LabelFontSize fill=@Data.Series[serieIndex].LabelColor class="data-label bar-animate">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
+                        <text x=@GetXCoordinate(columnIndex) y=@(GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3)) font-size=@LabelFontSize fill=@Data.Series[serieIndex].LabelColor class="data-label @(Animate ? "bar-animate" : "")">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
                     </text>
                 }
             }

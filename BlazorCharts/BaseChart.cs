@@ -12,6 +12,7 @@ public abstract class BaseChart : ComponentBase
     [Parameter] public string FontSize { get; set; } = "12px";
     [Parameter] public string FontColor { get; set; } = "black";
     [Parameter] public string TitleFontSize { get; set; } = "16px";
+    [Parameter] public bool Animate { get; set; } = true;
 
     protected double MarginLeft;
     protected double MarginRight = 10;
@@ -30,7 +31,7 @@ public abstract class BaseChart : ComponentBase
 
     protected double GetFontSizeAsNumber()
     {
-        int j = 0;
+        int j;
         for (j = 0; j < FontSize.Length; j++)
         {
             char c = FontSize[j];

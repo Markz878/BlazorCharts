@@ -8,7 +8,7 @@ namespace BlazorCharts
 {
     public class LineChartBase : XYBaseChart, IAsyncDisposable
     {
-        [Parameter] [EditorRequired] public LineSeries Data { get; set; } = default!;
+        [Parameter][EditorRequired] public LineSeries Data { get; set; } = default!;
         [Inject] public IJSRuntime JS { get; set; } = default!;
         private IJSObjectReference? jsmodule;
         protected ElementReference ChartRectRef;

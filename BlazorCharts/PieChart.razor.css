@@ -16,7 +16,7 @@
 }
 
     .data-item:hover {
-        filter: brightness(75%) drop-shadow(0 0 3px rgba(0,0,0,0.75));
+        filter: drop-shadow(0 0 3px rgba(0,0,0,0.80));
         transition: ease-in-out 0.1s;
     }
 

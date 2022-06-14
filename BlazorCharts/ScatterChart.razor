@@ -35,7 +35,7 @@
         {
             @foreach (ScatterPoint p in s.Points)
             {
-                <circle class="datapoint" cx=@GetXCoordinate(p.X) cy=@GetYCoordinate(p.Y) r=@p.R stroke="black" stroke-width="1" fill=@s.Color @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
+                <circle class="datapoint @(Animate ? "datapoint-animate" : "")" cx=@GetXCoordinate(p.X) cy=@GetYCoordinate(p.Y) r=@p.R stroke="black" stroke-width="1" fill=@s.Color @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
             }
         }
     </g>

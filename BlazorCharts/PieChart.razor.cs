@@ -7,7 +7,7 @@ namespace BlazorCharts
 {
     public class PieChartBase : BaseChart
     {
-        [Parameter] [EditorRequired] public PieSeries Data { get; set; } = default!;
+        [Parameter][EditorRequired] public PieSeries Data { get; set; } = default!;
         [Parameter] public string LabelFontSize { get; set; } = "9px";
 
         protected double R => Min(Width, Height) * 0.8 / 2;

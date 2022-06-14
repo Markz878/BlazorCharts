@@ -7,11 +7,11 @@
         @{double sum = 0;}
         @foreach(PieItem p in Data.PieItems)
         {
-            <path d="M @GetX(sum, R) @GetY(sum, R) A @R @R 0 @GetArcPathArg(p.Value) 0 @GetX(sum+p.Value, R) @GetY(sum+p.Value, R) L @(Width/2) @(Height/2)" fill=@p.Color class="data-item pie-animate" @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
+            <path d="M @GetX(sum, R) @GetY(sum, R) A @R @R 0 @GetArcPathArg(p.Value) 0 @GetX(sum+p.Value, R) @GetY(sum+p.Value, R) L @(Width/2) @(Height/2)" fill=@p.Color class="data-item @(Animate ? "pie-animate" : "")" @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
             @if (Data.ShowLabels)
             {
                 <text>
-                    <text x=@GetX(sum+p.Value/2, R * 0.7) y=@GetY(sum+p.Value/2, R * 0.7) font-size=@LabelFontSize fill=@p.LabelColor class="data-label pie-animate" dominant-baseline="middle">@p.Value.ToString("G7")</text>
+                    <text x=@GetX(sum+p.Value/2, R * 0.7) y=@GetY(sum+p.Value/2, R * 0.7) font-size=@LabelFontSize fill=@p.LabelColor class="data-label @(Animate ? "pie-animate" : "")" dominant-baseline="middle">@p.Value.ToString("G7")</text>
                 </text>
             }
             sum += p.Value;

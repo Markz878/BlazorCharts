@@ -36,7 +36,7 @@
     <g> @*Chart lines*@
         @foreach (LineSerie s in Data.Series)
         {
-            <polyline points=@GetPolylinePoints(s) class="dataline" style="stroke: @s.Color; stroke-width: @s.Thickness;"/>
+            <polyline points=@GetPolylinePoints(s) class="dataline @(Animate ? "dataline-animate" : "")" style="stroke: @s.Color; stroke-width: @s.Thickness;"/>
         }
     </g>
     <g>
