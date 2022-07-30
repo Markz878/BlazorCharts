@@ -9,7 +9,7 @@ namespace BlazorCharts
     {
         [Parameter][EditorRequired] public PieSeries Data { get; set; } = default!;
         [Parameter] public string LabelFontSize { get; set; } = "9px";
-
+        [Parameter] public bool DrawEdges { get; set; } = false;
         protected double R => Min(Width, Height) * 0.8 / 2;
         private double Total => Data.PieItems.Sum(x => x.Value);
 

@@ -7,7 +7,7 @@
         @{double sum = 0;}
         @foreach(PieItem p in Data.PieItems)
         {
-            <path d="M @GetX(sum, R) @GetY(sum, R) A @R @R 0 @GetArcPathArg(p.Value) 0 @GetX(sum+p.Value, R) @GetY(sum+p.Value, R) L @(Width/2) @(Height/2)" fill=@p.Color class="data-item @(Animate ? "pie-animate" : "")" @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
+            <path d="M @GetX(sum, R) @GetY(sum, R) A @R @R 0 @GetArcPathArg(p.Value) 0 @GetX(sum+p.Value, R) @GetY(sum+p.Value, R) L @(Width/2) @(Height/2)" fill=@p.Color stroke="black" stroke-width=@(DrawEdges ? "1" : "0") class="data-item @(Animate ? "pie-animate" : "")" @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
             @if (Data.ShowLabels)
             {
                 <text>

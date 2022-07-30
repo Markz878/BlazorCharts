@@ -13,8 +13,9 @@
     <Product></Product>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.0.11</Version>
+    <Version>1.1.01</Version>
     <RepositoryUrl>https://github.com/Markz878/BlazorCharts</RepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
 
@@ -23,7 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
+    <PackageReference Include="DotNet.ReproducibleBuilds" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.7" />
   </ItemGroup>
 
   <ItemGroup>

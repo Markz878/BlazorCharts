@@ -22,7 +22,7 @@ namespace BlazorCharts.Client.Pages
 
         private static IList<string> GetTooltip(double x, double y)
         {
-            return new List<string>
+            return new string[]
             {
                 $"KPI variable 1: {x:G3} t€",
                 $"KPI variable 2: {y:G3} t€",

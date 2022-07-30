@@ -1,0 +1,28 @@
+name: Build and deploy .NET Core app to Linux WebApp TestDockerContainers20220726210057
+on:
+  push:
+    branches:
+    - master
+env:
+  CONFIGURATION: Release
+  DOTNET_CORE_VERSION: 6.0.x
+  WORKING_DIRECTORY: BlazorCharts
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Update Nuget package
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+    - name: Build
+      run: dotnet build "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }}
+    - name: Publish
+      run: dotnet publish "${{ env.WORKING_DIRECTORY }}" --configuration ${{ env.CONFIGURATION }} --no-build --output "${{ env.AZURE_WEBAPP_PACKAGE_PATH }}"
+    - name: Publish Artifacts
+      uses: brandedoutcast/publish-nuget@v2.5.5
+      with:
+        PROJECT_FILE_PATH: BlazorCharts/BlazorCharts.csproj
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}

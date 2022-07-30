@@ -23,7 +23,7 @@ public partial class PieChartPage
         {
             foreach (PieItem item in data.PieItems)
             {
-                item.Value = Random.Shared.NextDouble() * 95 + 5;
+                item.Value = Math.Round(Random.Shared.NextDouble() * 95 + 5);
             }
             StateHasChanged();
             await Task.Delay(2000);
