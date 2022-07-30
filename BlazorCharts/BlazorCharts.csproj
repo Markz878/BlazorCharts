@@ -13,11 +13,9 @@
     <Product></Product>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <RepositoryUrl>https://github.com/Markz878/BlazorCharts</RepositoryUrl>
-    <IncludeSymbols>true</IncludeSymbols>
 	<DebugType>embedded</DebugType>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
 
