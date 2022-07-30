@@ -23,5 +23,4 @@ jobs:
         dotnet build -c Release
         dotnet pack -c Release 
     - name: Publish Artifacts
-      run: |
-        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
+      run: dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
