@@ -21,6 +21,9 @@ jobs:
     - name: Build solution and generate NuGet package
       run: |  
         cd ${{ env.WORKING_DIRECTORY }}
-        dotnet pack -c Release -o out 
+        dotnet build -c Release
+        dotnet pack -c Release 
     - name: Publish Artifacts
-      run: dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/out/*.nupkg --skip-duplicate --no-symbols true
+      run: |
+        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg
+        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.snupkg
