@@ -25,5 +25,5 @@ jobs:
         dotnet pack -c Release 
     - name: Publish Artifacts
       run: |
-        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg
-        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.snupkg
+        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json
+        dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.snupkg -s https://api.nuget.org/v3/index.json
