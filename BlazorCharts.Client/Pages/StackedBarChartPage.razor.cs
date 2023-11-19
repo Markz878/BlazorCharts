@@ -25,7 +25,7 @@ namespace BlazorCharts.Client.Pages
                 {
                     foreach (StackedBarItem p in item.Values)
                     {
-                        p.Value = Random.Shared.NextDouble() * 95+5;
+                        p.Value = Random.Shared.NextDouble() * 90 + 10;
                     }
                 }
                 StateHasChanged();

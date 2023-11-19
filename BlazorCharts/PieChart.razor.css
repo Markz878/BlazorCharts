@@ -22,14 +22,15 @@
 
 .pie-animate {
     animation: pie-transform 0.8s ease-out;
+    transform-origin: 50%;
 }
 
 @keyframes pie-transform {
     0% {
-        transform: scaleY(10%) translateY(100%);
+        transform: scale(10%) rotate(180deg);
     }
 
     100% {
-        transform: scaleY(100%) translateY(0);
+        transform: scale(100%) rotate(0);
     }
 }

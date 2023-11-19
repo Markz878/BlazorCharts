@@ -53,13 +53,13 @@ public class StackedBarChartBase : BaseChart
     protected void SetMarginLeft(double ymax)
     {
         double order = Round(Log10(ymax));
-        MarginLeft = order * 10 + 30;
+        MarginLeft = order < 0 ? (-order + 2) * 10 + 30 : order * 10 + 30;
     }
 
     protected static double GetLimit(IEnumerable<double> values)
     {
         double maxVal = values.Max();
-        double order = Pow(10, Round(Log10(maxVal)));
+        double order = Pow(10, Round(Log10(maxVal) - 0.4));
         double maxLimit = MathUtilities.RoundTo10(maxVal, order, true);
         return maxLimit;
     }
@@ -157,7 +157,7 @@ public class StackedBarChartBase : BaseChart
             }
             sum += Data.Series[serieIndex].Values[columnIndex].Value / 2;
             double y = GetYCoordinate(sum);
-            string X = x < Width / 2 ? $"{x + GetBarWidth()/2 + 3}px" : $"calc({x-GetBarWidth()/2 - 3}px - 100%)";
+            string X = x < Width / 2 ? $"{x + GetBarWidth() / 2 + 3}px" : $"calc({x - GetBarWidth() / 2 - 3}px - 100%)";
             string Y = y <= Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
             tooltipInfo = new(X, Y, Data.Series[serieIndex].Values[columnIndex].TooltipProperties!);
             showTooltip = true;

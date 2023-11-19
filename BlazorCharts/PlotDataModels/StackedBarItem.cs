@@ -9,7 +9,7 @@ public class StackedBarItem
     {
         if (value < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(value), "Stacked bar item can't have a negative value.");
+            throw new ArgumentOutOfRangeException(nameof(value), "Stacked bar items can't have a negative value.");
         }
         Value = value;
         TooltipProperties = tooltips;

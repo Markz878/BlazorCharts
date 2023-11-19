@@ -4,23 +4,27 @@ on:
     branches:
     - master
 env:
-  CONFIGURATION: Release
-  DOTNET_CORE_VERSION: 6.0.x
+  DOTNET_CORE_VERSION: 8.x
   WORKING_DIRECTORY: BlazorCharts
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     name: Update Nuget package
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET Core
+    - name: Checkout master
+      uses: actions/checkout@v2
+  
+    - name: Set up .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: ${{ env.DOTNET_CORE_VERSION }}
+
     - name: Build solution and generate NuGet package
       run: |  
         cd ${{ env.WORKING_DIRECTORY }}
         dotnet build -c Release
         dotnet pack -c Release 
+
     - name: Publish Artifacts
       run: dotnet nuget push ./${{ env.WORKING_DIRECTORY }}/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }} --skip-duplicate
