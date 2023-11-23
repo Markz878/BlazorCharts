@@ -142,7 +142,7 @@ public class StackedBarChartBase : BaseChart
         double y = Height - MarginBottom + 20;
         int size = GetColumnTitleFontsize();
         int rotation = size >= 9 ? 0 : -8;
-        return $"rotate({rotation},{x},{y})";
+        return $"rotate({rotation.ToString(c)},{x.ToString(c)},{y.ToString(c)})";
     }
 
     protected void MouseOver(int serieIndex, int columnIndex)

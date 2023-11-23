@@ -1,5 +1,6 @@
 ﻿using BlazorCharts.Utilities;
 using Microsoft.AspNetCore.Components;
+using System.Globalization;
 
 namespace BlazorCharts;
 
@@ -18,7 +19,7 @@ public abstract class BaseChart : ComponentBase
     protected double MarginRight = 10;
     protected double MarginTop = 30;
     protected double MarginBottom;
-
+    protected CultureInfo c = CultureInfo.InvariantCulture;
     protected string StringFormat = "G6";
 
     protected bool showTooltip;

@@ -5,14 +5,14 @@
     <g>
         @foreach (double value in YAxis)
         {
-            <line x1=@MarginLeft y1=@GetYCoordinate(value) x2=@(Width-MarginRight) y2=@GetYCoordinate(value) style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1=@MarginLeft y1=@GetYCoordinate(value).ToString(c) x2=@((Width-MarginRight).ToString(c)) y2=@GetYCoordinate(value).ToString(c) style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>
         @foreach (double value in YAxis)
         {
             <text>
-                <text x=@(MarginLeft-10) y=@GetYCoordinate(value) font-size=@FontSize fill=@FontColor text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
+                <text x=@((MarginLeft-10).ToString(c)) y=@GetYCoordinate(value).ToString(c) font-size=@FontSize fill=@FontColor text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>
@@ -23,19 +23,19 @@
         @foreach (double value in XAxis)
         {
             <text>
-                <text x=@GetXCoordinate(value) y=@GetXAxisTickYCoordinate() fill=@FontColor font-size=@FontSize text-anchor="middle">@value.ToString(StringFormat)</text>
+                <text x=@GetXCoordinate(value).ToString(c) y=@GetXAxisTickYCoordinate().ToString(c) fill=@FontColor font-size=@FontSize text-anchor="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>
     <g>
-        <text x=@(Width/2) y=@GetXAxisTitleY() font-size=@FontSize text-anchor="middle" fill=@FontColor dominant-baseline="middle">@XAxisTitle</text>
+        <text x=@((Width/2).ToString(c)) y=@GetXAxisTitleY().ToString(c) font-size=@FontSize text-anchor="middle" fill=@FontColor dominant-baseline="middle">@XAxisTitle</text>
     </g>
     <g>
         @foreach (ScatterSerie s in Data.Series)
         {
             @foreach (ScatterPoint p in s.Points)
             {
-                <circle class="datapoint @(Animate ? "datapoint-animate" : "")" cx=@GetXCoordinate(p.X) cy=@GetYCoordinate(p.Y) r=@p.R stroke="black" stroke-width="1" fill=@s.Color @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave/>
+                <circle class="datapoint @(Animate ? "datapoint-animate" : "")" cx=@GetXCoordinate(p.X).ToString(c) cy=@GetYCoordinate(p.Y).ToString(c) r=@p.R.ToString(c) stroke="black" stroke-width="1" fill=@s.Color @onmouseover=@(()=>MouseOver(p)) @onmouseout=@MouseLeave />
             }
         }
     </g>

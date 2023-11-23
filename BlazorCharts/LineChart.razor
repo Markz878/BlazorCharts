@@ -5,17 +5,17 @@
     <g> @*Y-axis lines*@
         @foreach (double value in YAxis)
         {
-            <line x1=@MarginLeft y1=@GetYCoordinate(value) x2=@(Width-MarginRight) y2=@GetYCoordinate(value) style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1=@MarginLeft.ToString(c) y1=@GetYCoordinate(value).ToString(c) x2=@((Width-MarginRight).ToString(c)) y2=@GetYCoordinate(value).ToString(c) style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>
-        <rect @ref=ChartRectRef x=@MarginLeft y=@MarginTop width=@(Width-MarginLeft-MarginRight) height=@(Height-MarginTop-MarginBottom) fill="transparent" @onmousemove=@((e)=>MouseMove(e)) @onmouseout=@MouseLeave/>
+        <rect @ref=ChartRectRef x=@MarginLeft.ToString(c) y=@MarginTop.ToString(c) width=@((Width-MarginLeft-MarginRight).ToString(c)) height=@((Height-MarginTop-MarginBottom).ToString(c)) fill="transparent" @onmousemove=@((e)=>MouseMove(e)) @onmouseout=@MouseLeave />
     </g>
     <g> @*Y-axis tick values*@
         @foreach (double value in YAxis)
         {
             <text>
-                <text x=@(MarginLeft-10) y=@GetYCoordinate(value) font-size=@FontSize fill=@FontColor text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
+                <text x=@((MarginLeft-10).ToString(c)) y=@GetYCoordinate(value).ToString(c) font-size=@FontSize fill=@FontColor text-anchor="end" dominant-baseline="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>
@@ -26,12 +26,12 @@
         @foreach (double value in XAxis)
         {
             <text>
-                <text x=@GetXCoordinate(value) y=@GetXAxisTickYCoordinate() font-size=@FontSize fill=@FontColor text-anchor="middle">@value.ToString(StringFormat)</text>
+                <text x=@GetXCoordinate(value).ToString(c) y=@GetXAxisTickYCoordinate().ToString(c) font-size=@FontSize fill=@FontColor text-anchor="middle">@value.ToString(StringFormat)</text>
             </text>
         }
     </g>
     <g> @*X-axis title*@
-        <text x=@(Width/2) y=@GetXAxisTitleY() font-size=@FontSize text-anchor="middle" fill=@FontColor dominant-baseline="middle">@XAxisTitle</text>
+        <text x=@((Width/2).ToString(c)) y=@GetXAxisTitleY().ToString(c) font-size=@FontSize text-anchor="middle" fill=@FontColor dominant-baseline="middle">@XAxisTitle</text>
     </g>
     <g> @*Chart lines*@
         @foreach (LineSerie s in Data.Series)
@@ -51,7 +51,7 @@
         <Tooltip Height=@Height Width=@Width TooltipInfo=@tooltipInfo FontSize=@FontSize/>
         @foreach (LineSerie s in Data.Series)
         {
-            <circle class="datapoint" cx=@GetXCoordinate(s.Points[ChartTooltipIndex].X) cy=@GetYCoordinate(s.Points[ChartTooltipIndex].Y) r=@(s.Thickness+1) stroke="black" stroke-width="1" fill=@s.Color/>
+            <circle class="datapoint" cx=@GetXCoordinate(s.Points[ChartTooltipIndex].X).ToString(c) cy=@GetYCoordinate(s.Points[ChartTooltipIndex].Y).ToString(c) r=@(s.Thickness+1) stroke="black" stroke-width="1" fill=@s.Color />
         }
     }
 </svg>

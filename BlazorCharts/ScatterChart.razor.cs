@@ -18,8 +18,8 @@ namespace BlazorCharts
             {
                 double x = GetXCoordinate(p.X);
                 double y = GetYCoordinate(p.Y);
-                string X = x < Width / 2 ? $"{x}px" : $"calc({x}px - 100%)";
-                string Y = y < Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
+                string X = x < Width / 2 ? $"{x.ToString(c)}px" : $"calc({x.ToString(c)}px - 100%)";
+                string Y = y < Height / 2 ? $"{y.ToString(c)}px" : $"calc({y.ToString(c)}px - 100%)";
                 tooltipInfo = new TooltipInfo(X, Y, p.TooltipProperties);
                 showTooltip = true;
             }

@@ -37,8 +37,8 @@ namespace BlazorCharts
                 double yShare = (e.ClientY - rect.Top) / rect.Height;
                 double x = MarginLeft + xShare * (Width - MarginLeft - MarginRight);
                 double y = MarginTop + yShare * (Height - MarginTop - MarginBottom);
-                string X = x < Width / 2 ? $"{x}px" : $"calc({x}px - 100%)";
-                string Y = y < Height / 2 ? $"{y}px" : $"calc({y}px - 100%)";
+                string X = x < Width / 2 ? $"{x.ToString(c)}px" : $"calc({x.ToString(c)}px - 100%)";
+                string Y = y < Height / 2 ? $"{y.ToString(c)}px" : $"calc({y.ToString(c)}px - 100%)";
                 ChartTooltipIndex = (int)(Data.Series[0].Points.Count * xShare);
                 tooltipInfo = new TooltipInfo(X, Y, Data.Series.Select(x => $"{x.Title}:{x.Points[ChartTooltipIndex].Y:G6}"));
                 showTooltip = true;
@@ -53,7 +53,7 @@ namespace BlazorCharts
 
         protected string GetPolylinePoints(LineSerie serie)
         {
-            return string.Join(" ", serie.Points.Select(x => $"{GetXCoordinate(x.X)},{GetYCoordinate(x.Y)}"));
+            return string.Join(" ", serie.Points.Select(x => $"{GetXCoordinate(x.X).ToString(c)},{GetYCoordinate(x.Y).ToString(c)}"));
         }
 
         protected IEnumerable<(string title, string color)> GetTitles()
