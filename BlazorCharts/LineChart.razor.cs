@@ -8,8 +8,9 @@ namespace BlazorCharts;
 
 public class LineChartBase : XYBaseChart, IAsyncDisposable
 {
-    [Parameter][EditorRequired] public LineSeries Data { get; set; } = default!;
-    [Inject] public IJSRuntime JS { get; set; } = default!;
+    [Parameter][EditorRequired] public required LineSeries Data { get; init; }
+    [Inject] public required IJSRuntime JS { get; init; }
+
     private IJSObjectReference? jsmodule;
     protected ElementReference ChartRectRef;
     protected int ChartTooltipIndex;
@@ -33,6 +34,7 @@ public class LineChartBase : XYBaseChart, IAsyncDisposable
         if(jsmodule is not null)
         {
             BoundingRectangle rect = await jsmodule.InvokeAsync<BoundingRectangle>("getBoundingRectangle", ChartRectRef);
+            Console.WriteLine(rect);
             double xShare = (e.ClientX - rect.Left) / rect.Width;
             double yShare = (e.ClientY - rect.Top) / rect.Height;
             double x = MarginLeft + xShare * (Width - MarginLeft - MarginRight);
@@ -42,7 +44,7 @@ public class LineChartBase : XYBaseChart, IAsyncDisposable
             ChartTooltipIndex = (int)(Data.Series[0].Points.Count * xShare);
             tooltipInfo = new TooltipInfo(X, Y, Data.Series.Select(x => $"{x.Title}:{x.Points[ChartTooltipIndex].Y:G6}"));
             showTooltip = true;
-            await Task.Delay(10);
+            await Task.Delay(50);
         }
     }
 

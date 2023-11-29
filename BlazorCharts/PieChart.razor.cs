@@ -32,8 +32,8 @@ public class PieChartBase : BaseChart
     {
         if (p.TooltipProperties is not null)
         {
-            string X = $"calc({Width / 2}px - 50%)";
-            string Y = $"calc({Height / 2}px - 50%)";
+            string X = $"calc({(Width / 2).ToString(c)}px - 50%)";
+            string Y = $"calc({(Height / 2).ToString(c)}px - 50%)";
             tooltipInfo = new TooltipInfo(X, Y, p.TooltipProperties);
             showTooltip = true;
         }

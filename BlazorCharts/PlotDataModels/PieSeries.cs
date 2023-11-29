@@ -1,10 +1,17 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class PieSeries
 {
     public bool ShowLabels { get; set; }
-    public PieItem[] PieItems { get; }
+    public required PieItem[] PieItems { get; set; }
 
+    public PieSeries()
+    {
+    }
+
+    [SetsRequiredMembers]
     public PieSeries(bool showLabels, params PieItem[] pieItems)
     {
         if (pieItems.Length < 2)

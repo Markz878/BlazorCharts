@@ -1,9 +1,16 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class LineSeries
 {
-    public IList<LineSerie> Series { get; }
+    public required IList<LineSerie> Series { get; set; }
 
+    public LineSeries()
+    {
+    }
+
+    [SetsRequiredMembers]
     public LineSeries(params LineSerie[] series)
     {
         ArgumentNullException.ThrowIfNull(series);

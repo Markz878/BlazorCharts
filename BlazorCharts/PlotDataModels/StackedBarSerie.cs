@@ -1,12 +1,19 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class StackedBarSerie
 {
-    public string Title { get; set; }
-    public string Color { get; set; }
-    public string LabelColor { get; set; }
-    public IList<StackedBarItem> Values { get; }
+    public required string Title { get; set; }
+    public required string Color { get; set; }
+    public required string LabelColor { get; set; }
+    public required IList<StackedBarItem> Values { get; set; }
 
+    public StackedBarSerie()
+    {
+    }
+
+    [SetsRequiredMembers]   
     public StackedBarSerie(string title, string color, string labelColor, IList<StackedBarItem> values)
     {
         ArgumentNullException.ThrowIfNull(title);

@@ -1,13 +1,20 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class PieItem
 {
-    public string Title { get; set; }
+    public required string Title { get; set; }
     public double Value { get; set; }
-    public string Color { get; set; }
-    public string LabelColor { get; set; }
-    public IEnumerable<string>? TooltipProperties { get; }
-    
+    public required string Color { get; set; }
+    public required string LabelColor { get; set; }
+    public IEnumerable<string>? TooltipProperties { get; set; }
+
+    public PieItem()
+    {
+    }
+
+    [SetsRequiredMembers]
     public PieItem(string title, double value, string color, string labelColor = "black", IEnumerable<string>? tooltipProperties = null)
     {
         ArgumentNullException.ThrowIfNull(title, nameof(title));

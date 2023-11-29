@@ -1,10 +1,17 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class StackedBarItem
 {
-    public double Value { get; set; }
-    public IEnumerable<string>? TooltipProperties { get; }
+    public required double Value { get; set; }
+    public IEnumerable<string>? TooltipProperties { get; set; }
 
+    public StackedBarItem()
+    {
+    }
+
+    [SetsRequiredMembers]   
     public StackedBarItem(double value, IEnumerable<string>? tooltips = null)
     {
         if (value < 0)

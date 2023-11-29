@@ -1,10 +1,17 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class LinePoint
 {
-    public double X { get; set; }
-    public double Y { get; set; }
-    
+    public required double X { get; set; }
+    public required double Y { get; set; }
+
+    public LinePoint()
+    {
+    }
+
+    [SetsRequiredMembers]
     public LinePoint(double x, double y)
     {
         X = x;

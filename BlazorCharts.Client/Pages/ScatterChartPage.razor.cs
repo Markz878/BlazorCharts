@@ -47,7 +47,7 @@ public partial class ScatterChartPage
                 }
             }
             StateHasChanged();
-            await Task.Delay(500);
+            await Task.Delay(2500);
         }
     }
 

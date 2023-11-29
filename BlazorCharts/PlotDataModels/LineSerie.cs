@@ -1,14 +1,20 @@
 ﻿using BlazorCharts.Utilities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BlazorCharts.PlotDataModels;
 
 public class LineSerie
 {
-    public string Title { get; set; }
-    public string Color { get; set; }
-    public double Thickness { get; set; }
-    public IList<LinePoint> Points { get; }
+    public required string Title { get; set; }
+    public required string Color { get; set; }
+    public required double Thickness { get; set; }
+    public required IList<LinePoint> Points { get; set; }
 
+    public LineSerie()
+    {
+    }
+
+    [SetsRequiredMembers]
     public LineSerie(string title, string color, double thickness, IList<LinePoint> points)
     {
         ArgumentNullException.ThrowIfNull(title);

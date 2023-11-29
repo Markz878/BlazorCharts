@@ -1,11 +1,18 @@
-﻿namespace BlazorCharts.PlotDataModels;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace BlazorCharts.PlotDataModels;
 
 public class ScatterSerie
 {
-    public string Title { get; set; }
-    public string Color { get; set; }
-    public IList<ScatterPoint> Points { get; }
+    public required string Title { get; set; }
+    public required string Color { get; set; }
+    public required IList<ScatterPoint> Points { get; set;}
 
+    public ScatterSerie()
+    {
+    }
+
+    [SetsRequiredMembers]
     public ScatterSerie(string title, string color, IList<ScatterPoint> points)
     {
         ArgumentNullException.ThrowIfNull(title);

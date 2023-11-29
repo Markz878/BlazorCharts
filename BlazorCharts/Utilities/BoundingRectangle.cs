@@ -1,6 +1,6 @@
 ﻿namespace BlazorCharts.Utilities;
 
-internal class BoundingRectangle
+internal record BoundingRectangle
 {
     public double Bottom { get; set; }
     public double Height { get; set; }
