@@ -5,7 +5,7 @@
     <g>
         @foreach (double value in YAxis)
         {
-            <line x1=@MarginLeft y1=@GetYCoordinate(value).ToString(c) x2=@((Width-MarginRight).ToString(c)) y2=@GetYCoordinate(value).ToString(c) style="stroke:#e0e0e0;stroke-width:1" />
+            <line x1=@MarginLeft.ToString(c) y1=@GetYCoordinate(value).ToString(c) x2=@((Width-MarginRight).ToString(c)) y2=@GetYCoordinate(value).ToString(c) style="stroke:#e0e0e0;stroke-width:1" />
         }
     </g>
     <g>

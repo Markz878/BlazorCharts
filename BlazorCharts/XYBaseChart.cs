@@ -6,8 +6,8 @@ namespace BlazorCharts;
 
 public abstract class XYBaseChart : BaseChart
 {
-    [Parameter] [EditorRequired] public string YAxisTitle { get; set; } = "";
-    [Parameter] [EditorRequired] public string XAxisTitle { get; set; } = "";
+    [Parameter][EditorRequired] public required string YAxisTitle { get; init; }
+    [Parameter][EditorRequired] public required string XAxisTitle { get; init; }
 
     protected double XMin;
     protected double XMax;

@@ -5,7 +5,7 @@ namespace BlazorCharts.PlotDataModels;
 public class PieItem
 {
     public required string Title { get; set; }
-    public double Value { get; set; }
+    public required double Value { get; set; }
     public required string Color { get; set; }
     public required string LabelColor { get; set; }
     public IEnumerable<string>? TooltipProperties { get; set; }

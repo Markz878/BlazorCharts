@@ -14,9 +14,9 @@
 }
 
 @code {
-    [Parameter] [EditorRequired] public double Width { get; set; }
-    [Parameter] [EditorRequired] public double Height { get; set; }
-    [Parameter] [EditorRequired] public IEnumerable<(string title, string color)>? Titles { get; set; }
+    [Parameter][EditorRequired] public required double Width { get; set; }
+    [Parameter][EditorRequired] public required double Height { get; set; }
+    [Parameter][EditorRequired] public required IEnumerable<(string title, string color)> Titles { get; set; }
     [Parameter] public string FontSize { get; set; } = "10px";
     [Parameter] public string FontColor { get; set; } = "black";
 }

@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class PieChartPage
 {
-    private PieSeries data = default!;
+    private PieSeries? data;
     private bool movePoints;
 
     protected override void OnInitialized()
@@ -19,7 +19,7 @@ public partial class PieChartPage
     private async Task MovePoints()
     {
         movePoints = true;
-        while (movePoints)
+        while (movePoints && data is not null)
         {
             foreach (PieItem item in data.PieItems)
             {

@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class ScatterChartPage
 {
-    private ScatterSeries data = default!;
+    private ScatterSeries? data;
     private bool movePoints;
     protected override void OnInitialized()
     {
@@ -35,7 +35,7 @@ public partial class ScatterChartPage
     private async Task MovePoints()
     {
         movePoints = true;
-        while (movePoints)
+        while (movePoints && data is not null)
         {
             foreach (ScatterSerie item in data.Series)
             {

@@ -6,7 +6,8 @@ namespace BlazorCharts;
 
 public class ScatterChartBase : XYBaseChart
 {
-    [Parameter][EditorRequired] public ScatterSeries Data { get; set; } = default!;
+    [Parameter][EditorRequired] public required ScatterSeries Data { get; init; }
+
     protected override void OnParametersSet()
     {
         SetLimits(Data.Series.SelectMany(x => x.Points).Select(x => x.X), Data.Series.SelectMany(x => x.Points).Select(x => x.Y));

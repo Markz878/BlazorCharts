@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class LineChartPage
 {
-    private LineSeries data = default!;
+    private LineSeries? data;
     private bool movePoints;
 
     protected override void OnInitialized()
@@ -20,7 +20,7 @@ public partial class LineChartPage
     private async Task RandomizeLines()
     {
         movePoints = true;
-        while (movePoints)
+        while (movePoints && data is not null)
         {
             foreach (LineSerie item in data.Series)
             {

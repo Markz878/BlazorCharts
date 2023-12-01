@@ -7,9 +7,9 @@ namespace BlazorCharts;
 
 public class PieChartBase : BaseChart
 {
-    [Parameter][EditorRequired] public PieSeries Data { get; set; } = default!;
-    [Parameter] public string LabelFontSize { get; set; } = "9px";
-    [Parameter] public double EdgeThickness { get; set; }
+    [Parameter][EditorRequired] public required PieSeries Data { get; init; }
+    [Parameter] public string LabelFontSize { get; init; } = "9px";
+    [Parameter] public double EdgeThickness { get; init; }
     protected double R => Min(Width, Height) * 0.8 / 2;
     private double Total => Data.PieItems.Sum(x => x.Value);
 

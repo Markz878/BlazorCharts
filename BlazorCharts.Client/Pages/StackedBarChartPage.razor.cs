@@ -4,7 +4,7 @@ namespace BlazorCharts.Client.Pages;
 
 public partial class StackedBarChartPage
 {
-    private StackedBarSeries data = default!;
+    private StackedBarSeries? data;
     private bool movePoints;
 
     protected override void OnInitialized()
@@ -19,7 +19,7 @@ public partial class StackedBarChartPage
     private async Task MovePoints()
     {
         movePoints = true;
-        while (movePoints)
+        while (movePoints && data is not null)
         {
             foreach (StackedBarSerie item in data.Series)
             {
