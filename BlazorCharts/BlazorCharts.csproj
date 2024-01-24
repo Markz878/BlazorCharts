@@ -13,7 +13,7 @@
     <Product></Product>
 	<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <RepositoryUrl>https://github.com/Markz878/BlazorCharts</RepositoryUrl>
 	<DebugType>embedded</DebugType>
   </PropertyGroup>

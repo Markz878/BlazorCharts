@@ -1,7 +1,7 @@
 ﻿@inherits StackedBarChartBase
 
 <svg class="chart" viewBox="0 0 @Width @Height">
-    <ChartTitle Width=@Width Title=@Title FontSize=@TitleFontSize FontColor=@FontColor/>
+    <ChartTitle Width=@Width Title=@Title FontSize=@TitleFontSize FontColor=@FontColor />
     <g>
         @foreach (double value in YAxis)
         {
@@ -50,7 +50,7 @@
                     int serieIndex = j;
                     sum += Data.Series[serieIndex].Values[columnIndex].Value;
                     <text>
-                        <text x=@GetXCoordinate(columnIndex).ToString(c) y=@((GetYCoordinate(sum)+GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value)/2+(Data.Titles.Count < 6 ? 5 : 3)).ToString(c)) font-size=@LabelFontSize fill=@Data.Series[serieIndex].LabelColor class="data-label @(Animate ? "bar-animate" : "")">@Data.Series[serieIndex].Values[columnIndex].Value.ToString("G4")</text>
+                        <text font-size=@LabelFontSize fill=@Data.Series[serieIndex].LabelColor class="data-label @(Animate ? "bar-animate" : "")" style="translate: @(GetXCoordinate(columnIndex).ToString(c) + "px") @(GetLabelTextYTranslate(columnIndex, serieIndex, sum) + "px");">@Data.Series[serieIndex].Values[columnIndex].Value.ToString(LabelTextFormat)</text>
                     </text>
                 }
             }
@@ -58,10 +58,10 @@
     </g>
     @if (ShowLegend)
     {
-        <Legend Height=@Height Width=@Width Titles=@GetTitles() FontSize=@FontSize FontColor=@FontColor/>
+        <Legend Height=@Height Width=@Width Titles=@GetTitles() FontSize=@FontSize FontColor=@FontColor />
     }
     @if (showTooltip)
     {
-        <Tooltip Height=@Height Width=@Width TooltipInfo=@tooltipInfo FontSize=@FontSize/>
+        <Tooltip Height=@Height Width=@Width TooltipInfo=@tooltipInfo FontSize=@FontSize />
     }
 </svg>

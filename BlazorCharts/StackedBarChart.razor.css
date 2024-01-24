@@ -18,6 +18,7 @@
 .data-label {
     pointer-events: none;
     text-anchor: middle;
+    transition: ease-in-out 0.2s;
 }
 
 .data-item {

@@ -10,6 +10,7 @@ public class StackedBarChartBase : BaseChart
     [Parameter][EditorRequired] public required StackedBarSeries Data { get; init; }
     [Parameter][EditorRequired] public required string YAxisTitle { get; init; } = "";
     [Parameter] public string LabelFontSize { get; init; } = "10px";
+    [Parameter] public string LabelTextFormat { get; init; } = "G4";
 
     protected double YMax;
 
@@ -133,6 +134,11 @@ public class StackedBarChartBase : BaseChart
             }
         }
         return fontSize;
+    }
+
+    protected string GetLabelTextYTranslate(int columnIndex, int serieIndex, double sum)
+    {
+        return (GetYCoordinate(sum) + GetBarHeight(Data.Series[serieIndex].Values[columnIndex].Value) / 2 + (Data.Titles.Count < 6 ? 5 : 3)).ToString(c);
     }
 
     protected string GetTitleTransform(int columnIndex)
